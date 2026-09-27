@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useLayoutEffect } from "react";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Trabajos from "./pages/Trabajos";
@@ -6,9 +7,20 @@ import Nosotros from "./pages/Nosotros";
 import Experiencias from "./pages/Experiencias";
 import Contacto from "./pages/Contacto";
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />

@@ -28,8 +28,8 @@ function Footer() {
       </div>
       <div className="footer-bottom">
         <p>© 2026 Isabella Flores. Todos los derechos reservados.</p>
-        <p>Desarrollada por engineer Francisco Soriano.</p>
-        <p>Encargada de marketing: Evelyn Soriano.</p>
+        <p>Desarrollada por Francisco Soriano.</p>
+        <p>Encargada de marketing Evelyn Soriano.</p>
       </div>
     </footer>
   );
