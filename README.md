@@ -1,6 +1,6 @@
-# Isabella Flores
+# Isabella Floristeria 
 
-Sitio web de **Isabella Flores**, una floristería ubicada en Atlixco, Puebla. El proyecto presenta la marca y sus arreglos florales, muestra trabajos y experiencias, e invita a los visitantes a solicitar diseños personalizados o cotizaciones por WhatsApp.
+Sitio web de **Isabella Floristeria**, una floristería ubicada en Atlixco, Puebla. El proyecto presenta la marca y sus arreglos florales, muestra trabajos y experiencias, e invita a los visitantes a solicitar diseños personalizados o cotizaciones por WhatsApp.
 
 ## Funcionalidades
 
