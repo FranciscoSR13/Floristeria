@@ -1,77 +1,40 @@
 # Isabella Floristeria 
 
-Sitio web de **Isabella Floristeria**, una floristería ubicada en Atlixco, Puebla. El proyecto presenta la marca y sus arreglos florales, muestra trabajos y experiencias, e invita a los visitantes a solicitar diseños personalizados o cotizaciones por WhatsApp.
+Sitio web de la floristería **Isabella Floristeria**, en Atlixco, Puebla. Incluye presentación del negocio, portafolio, experiencias de clientes, contacto y acceso de clientes. El catálogo y la compra en línea están preparados como módulos de próxima apertura.
 
-## Funcionalidades
+## Preparar el proyecto
 
-- Página de inicio con categorías, arreglos destacados, promociones y accesos para cotizar.
-- Secciones de trabajos, historia de la floristería, experiencias de clientes y contacto.
-- Navegación entre páginas con React Router y menú adaptable a dispositivos móviles.
-- Enlaces de cotización que abren WhatsApp con un mensaje inicial.
-- Imágenes de marca almacenadas en `public/images` y fotografías de Unsplash para algunos elementos visuales.
-
-El sitio es actualmente una **interfaz de presentación**. Aunque el repositorio incluye algunos componentes y páginas preliminares para tienda, carrito, cuenta y cotización, esas vistas no están conectadas al recorrido principal. No hay un flujo de compra, inicio de sesión ni envío funcional de formularios implementado todavía. Los datos de contacto visibles en la página de contacto son textos de ejemplo y deben actualizarse antes de publicar el sitio.
-
-## Tecnologías
-
-- React 19 y TypeScript
-- Vite 8
-- React Router 7
-- Lucide React para iconos
-- ESLint para análisis estático
-
-## Requisitos
-
-- Node.js compatible con Vite 8
-- npm
-
-## Instalación y desarrollo
-
-Desde la carpeta del proyecto, instala las dependencias e inicia el servidor local:
+1. Instala Node.js compatible con Vite 8 y npm.
+2. Copia `.env.example` a `.env.local` y agrega la URL y la clave **publishable** del proyecto Supabase.
+3. Si aún no conectaste las experiencias, ejecuta `supabase/experiencias.sql` una sola vez. Después ejecuta `supabase/ecommerce.sql` desde Supabase SQL Editor. Si las experiencias ya funcionan, ejecuta solo el esquema de comercio.
+4. Inicia la web:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Vite mostrará en la terminal la dirección local para abrir en el navegador. Para generar una compilación de producción y previsualizarla:
+## Seguridad y cuentas
 
-```bash
-npm run build
-npm run preview
-```
+- El acceso usa Supabase Auth con flujo PKCE. Supabase recibe la contraseña por HTTPS y la almacena con hash bcrypt; la aplicación no guarda ni calcula hashes de contraseñas.
+- El alta y la recuperación piden al menos 12 caracteres en la interfaz. Repite ese mínimo en **Authentication → Settings → Password** para que también se aplique en el servidor, y activa la comprobación de contraseñas filtradas si está disponible en el plan. Las cuentas existentes con contraseñas más cortas podrían necesitar restablecerlas al endurecer el requisito.
+- Las sesiones se mantienen con el cliente oficial de Supabase. El proveedor Google requiere credenciales OAuth propias configuradas en el panel de Supabase.
+- Las tablas del comercio tienen RLS y permisos explícitos. Cada cliente solo puede consultar o modificar sus propios datos; el catálogo activo es público.
+- El checkout, los precios finales, el inventario, el estado de los pedidos y las llamadas de pago deben ejecutarse en un backend confiable, como una Supabase Edge Function. No se guardan números completos de tarjeta, CVV ni claves secretas del proveedor en la web.
+- Nunca pongas una clave `service_role`, `secret` de Supabase ni credenciales privadas en variables `VITE_*`. `.env.local` está excluido de Git.
 
-## Comandos disponibles
+## Esquema preparado para comercio
+
+`supabase/ecommerce.sql` crea perfiles y domicilios, categorías, productos, variantes, imágenes, inventario, carritos, favoritos, pedidos y sus partidas e historial, pagos, entregas, métodos de pago, zonas de entrega, promociones, canjes y solicitudes de cotización. Las operaciones críticas de pago y compra quedan reservadas al backend; el archivo prepara la base de datos, no activa todavía el checkout.
+
+Las rutas de tienda, producto, carrito, pago, entregas, pedidos, inventario, promociones y cotizaciones muestran el estado de “Próximamente” hasta que se construyan sus pantallas funcionales.
+
+## Comandos
 
 | Comando | Descripción |
 | --- | --- |
-| `npm run dev` | Inicia el servidor de desarrollo de Vite. |
-| `npm run build` | Comprueba los tipos de TypeScript y genera la compilación en `dist/`. |
-| `npm run preview` | Sirve localmente la compilación de producción. |
-| `npm run lint` | Ejecuta ESLint sobre el proyecto. |
+| `npm run dev` | Inicia el servidor de desarrollo. |
+| `npm run build` | Comprueba TypeScript y genera `dist/`. |
+| `npm run preview` | Previsualiza la compilación de producción. |
 
-## Estructura del proyecto
-
-```text
-public/
-  images/          Logotipos, fotografías y recursos de marca
-src/
-  components/      Componentes reutilizables de interfaz
-  layouts/         Estructura compartida de navegación y pie de página
-  pages/           Vistas del sitio
-  services/        Espacio reservado para servicios e integraciones
-  types/           Tipos de TypeScript
-  App.tsx          Rutas principales
-```
-
-## Páginas principales
-
-| Ruta | Contenido |
-| --- | --- |
-| `/` | Inicio y presentación de arreglos destacados. |
-| `/trabajos` | Portafolio de diseños florales. |
-| `/nosotros` | Historia y valores de la floristería. |
-| `/experiencias` | Testimonios y experiencias de clientes. |
-| `/contacto` | Información de contacto y formulario visual. |
-
-Las rutas desconocidas redirigen actualmente a la página de inicio.
+Consulta [supabase/README.md](supabase/README.md) para la configuración de Auth, Google, experiencias y comercio.

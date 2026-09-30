@@ -1,9 +1,9 @@
-import { Flower2, Heart, Sparkles } from "lucide-react";
+import { Flower2, Gift, Heart, Sparkles, Truck } from "lucide-react";
 
 function Nosotros() {
   return (
     <main>
-      <section className="page-header">
+      <section className="page-header about-page-header">
         <div className="section-container">
           <span className="section-label">CONÓCENOS</span>
 
@@ -50,6 +50,35 @@ function Nosotros() {
         </div>
       </section>
 
+      <section className="commitments-section">
+        <div className="section-container">
+          <h2>Compromisos</h2>
+          <div className="commitments-grid">
+            <article className="commitment-card">
+              <Flower2 aria-hidden="true" />
+              <div>
+                <h3>Flores frescas y seleccionadas</h3>
+                <p>Elegimos flores de calidad y cuidamos cada detalle de nuestros arreglos.</p>
+              </div>
+            </article>
+            <article className="commitment-card">
+              <Truck aria-hidden="true" />
+              <div>
+                <h3>Entrega coordinada</h3>
+                <p>Preparamos tu pedido con cariño y coordinamos la entrega para que llegue en el momento indicado.</p>
+              </div>
+            </article>
+            <article className="commitment-card">
+              <Gift aria-hidden="true" />
+              <div>
+                <h3>Detalles personalizados</h3>
+                <p>Agrega una tarjeta, colores o detalles especiales para hacer único tu regalo.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section className="section values-section">
         <div className="section-container">
           <div className="section-heading centered">
@@ -91,6 +120,16 @@ function Nosotros() {
                 que supere las expectativas.
               </p>
             </article>
+            <article className="value-card">
+              <Flower2 size={32} />
+
+              <h3>Frescura</h3>
+
+              <p>
+                Seleccionamos flores frescas para que cada arreglo
+                conserve su belleza y acompañe tus momentos especiales.
+              </p>
+            </article>
           </div>
         </div>
       </section>
@@ -109,4 +148,4 @@ function Nosotros() {
   );
 }
 
-export default Nosotros;    
+export default Nosotros;
