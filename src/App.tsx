@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Trabajos from "./pages/Trabajos";
@@ -44,7 +44,7 @@ function App() {
             <Route path="/pedidos" element={<CommerceComingSoon />} />
             <Route path="/inventario" element={<CommerceComingSoon />} />
             <Route path="/promociones" element={<CommerceComingSoon />} />
-            <Route path="/cotizacion" element={<CommerceComingSoon />} />
+            <Route path="/cotizacion" element={<Navigate to="/contacto#ayuda" replace />} />
             <Route path="*" element={<Home />} />
           </Route>
         </Routes>

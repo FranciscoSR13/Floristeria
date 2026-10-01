@@ -40,7 +40,7 @@ function Login() {
           options: { data: { full_name: name.trim() }, emailRedirectTo: `${window.location.origin}/cuenta` },
         });
         if (authError) throw authError;
-        showMessage(data.session ? "Tu cuenta ya está lista. ¡Bienvenida a Isabella Flores!" : "Revisa tu correo para confirmar la cuenta y terminar el registro.");
+        showMessage(data.session ? "Tu cuenta ya está lista. ¡Bienvenida a Isabella Floristería!" : "Revisa tu correo para confirmar la cuenta y terminar el registro.");
       } else {
         const { error: authError } = await supabaseClient.auth.signInWithPassword({ email, password });
         if (authError) throw authError;
@@ -100,7 +100,7 @@ function Login() {
   return (
     <main className="auth-page">
       <section className="auth-shell">
-        <div className="auth-decor"><span className="auth-flower">✿</span><span>ISABELLA FLORES</span><h1>Los detalles<br />también cuentan<br /><em>tu historia.</em></h1><p>Guarda tus momentos favoritos y encuentra inspiración floral para tus ocasiones especiales.</p><span className="auth-decor-foot">ATLIXCO · PUEBLA</span></div>
+        <div className="auth-decor"><span className="auth-flower">✿</span><span>ISABELLA FLORISTERÍA</span><h1>Los detalles<br />también cuentan<br /><em>tu historia.</em></h1><p>Guarda tus momentos favoritos y encuentra inspiración floral para tus ocasiones especiales.</p><span className="auth-decor-foot">ATLIXCO · PUEBLA</span></div>
         <div className="auth-card-wrap">
           <Link className="auth-back-link" to="/"><ArrowLeft size={16} /> Volver al inicio</Link>
           <div className="auth-card">

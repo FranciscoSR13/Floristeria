@@ -1,16 +1,24 @@
-import { type FormEvent } from "react";
+import { type FormEvent, useEffect } from "react";
 import { ArrowRight, Clock3, MapPin, MessageCircle, Phone, Send } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const whatsappNumber = "522441374286";
 const facebookUrl = "https://www.facebook.com/profile.php?id=61594027933855&locale=es_LA";
 
 function Contacto() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === "#ayuda") {
+      document.getElementById("ayuda")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [location.hash]);
+
   function sendToWhatsApp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const message = [
-      "Hola, Isabella Flores. Me gustaría ponerme en contacto.",
+      "Hola, Isabella Floristería. Me gustaría ponerme en contacto.",
       `Nombre: ${formData.get("nombre")}`,
       `Teléfono: ${formData.get("telefono") || "No indicado"}`,
       `Motivo: ${formData.get("asunto")}`,
@@ -29,7 +37,7 @@ function Contacto() {
             <p>Cuéntanos qué quieres celebrar. Te orientamos para crear un arreglo especial y coordinar cada detalle.</p>
             <a className="contact-whatsapp-cta" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"><MessageCircle size={20} /> Escribir por WhatsApp <ArrowRight size={17} /></a>
           </div>
-          <div className="contact-hero-note"><span className="contact-note-flower">✿</span><p>Un detalle pensado<br />con cariño cambia el día.</p><span>ISABELLA FLORES · ATLIXCO</span></div>
+          <div className="contact-hero-note"><span className="contact-note-flower">✿</span><p>Un detalle pensado<br />con cariño cambia el día.</p><span>ISABELLA FLORISTERÍA · ATLIXCO</span></div>
         </div>
       </section>
 
@@ -44,10 +52,10 @@ function Contacto() {
               <a className="contact-detail-card" href="https://maps.google.com/?q=Atlixco%2C+Puebla" target="_blank" rel="noreferrer"><span className="contact-detail-icon"><MapPin size={20} /></span><span><small>ESTAMOS EN</small><strong>Atlixco, Puebla</strong><em>Ver ubicación en mapas</em></span><ArrowRight size={17} /></a>
               <div className="contact-detail-card"><span className="contact-detail-icon"><Clock3 size={20} /></span><span><small>HORARIO DE ATENCIÓN</small><strong>Lunes a sábado</strong><em>9:00 a. m. – 7:00 p. m.</em></span></div>
             </div>
-            <div className="contact-social-row"><a href={facebookUrl} target="_blank" rel="noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.4 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.6 1.6-1.6H17V3.5c-.4-.1-1.4-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.4H7.5V13h2.8v8h3.1Z" /></svg> Síguenos en Facebook</a><Link to="/cotizacion">Solicitar una cotización <ArrowRight size={16} /></Link></div>
+            <div className="contact-social-row"><a href={facebookUrl} target="_blank" rel="noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.4 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.6 1.6-1.6H17V3.5c-.4-.1-1.4-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.4H7.5V13h2.8v8h3.1Z" /></svg> Síguenos en Facebook</a><Link to="/contacto#ayuda">Solicitar una cotización <ArrowRight size={16} /></Link></div>
           </div>
 
-          <div className="contact-form-card">
+          <div className="contact-form-card" id="ayuda" tabIndex={-1}>
             <span className="contact-form-overline"><MessageCircle size={16} /> RESPUESTA DIRECTA</span>
             <h2>¿En qué podemos ayudarte?</h2>
             <p>Completa el mensaje y se abrirá WhatsApp para que puedas enviárnoslo.</p>
@@ -59,7 +67,7 @@ function Contacto() {
               <div className="form-group"><label htmlFor="asunto">¿Qué necesitas?</label><select id="asunto" name="asunto" defaultValue="" required><option value="" disabled>Elige un motivo</option><option>Cotizar un arreglo</option><option>Diseño para evento</option><option>Consultar una entrega</option><option>Información sobre flores</option><option>Otro motivo</option></select></div>
               <div className="form-group"><label htmlFor="mensaje">Cuéntanos un poco más</label><textarea id="mensaje" name="mensaje" rows={5} minLength={8} placeholder="Describe tu idea, ocasión o pregunta…" required /></div>
               <button type="submit" className="contact-send-button"><Send size={17} /> Continuar por WhatsApp</button>
-              <small className="contact-form-footnote">Tu mensaje se enviará a Isabella Flores por WhatsApp.</small>
+              <small className="contact-form-footnote">Tu mensaje se enviará a Isabella Floristería por WhatsApp.</small>
             </form>
           </div>
         </div>

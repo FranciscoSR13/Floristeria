@@ -1,6 +1,6 @@
-# Isabella Floristeria 
+# Isabella Floristería
 
-Sitio web de la floristería **Isabella Floristeria**, en Atlixco, Puebla. Incluye presentación del negocio, portafolio, experiencias de clientes, contacto y acceso de clientes. El catálogo y la compra en línea están preparados como módulos de próxima apertura.
+Sitio web de **Isabella Floristería**, en Atlixco, Puebla. Incluye presentación del negocio, portafolio, experiencias de clientes, contacto y acceso de clientes. El catálogo y la compra en línea están preparados como módulos de próxima apertura.
 
 ## Preparar el proyecto
 

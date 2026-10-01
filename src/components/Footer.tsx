@@ -7,7 +7,7 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-brand">
           <Link to="/" className="footer-logo">
-            <img src="/images/Logo1.png" alt="Isabella Flores" />
+            <img src="/images/Logo1.png" alt="Isabella Floristería" />
           </Link>
           <p>Creamos arreglos florales para convertir momentos especiales en recuerdos inolvidables.</p>
         </div>
@@ -20,7 +20,7 @@ function Footer() {
           <Link to="/experiencias">Experiencias</Link>
           <Link to="/contacto">Contacto</Link>
           <Link to="/login">Iniciar sesión</Link>
-          <Link to="/cotizacion">Pedidos personalizados</Link>
+          <Link to="/contacto#ayuda">Pedidos personalizados</Link>
           <Link to="/metodos-de-pago">Métodos de pago</Link>
         </div>
         <div className="footer-section">
@@ -32,7 +32,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>© 2026 Isabella Floristeria. Todos los derechos reservados.</p>
+        <p>© 2026 Isabella Floristería. Todos los derechos reservados.</p>
         <p>Desarrollada por Francisco Soriano.</p>
         <p>Encargada de marketing Evelyn Soriano.</p>
       </div>
