@@ -1,40 +1,41 @@
 # Isabella Floristería
 
-Sitio web de **Isabella Floristería**, en Atlixco, Puebla. Incluye presentación del negocio, portafolio, experiencias de clientes, contacto y acceso de clientes. El catálogo y la compra en línea están preparados como módulos de próxima apertura.
+Sitio web de Isabella Floristería, en Atlixco, Puebla. Incluye presentación del negocio, portafolio, contacto y experiencias públicas de clientes. La tienda en línea está preparada para una próxima etapa.
 
-## Preparar el proyecto
+## Inicio rápido
 
-1. Instala Node.js compatible con Vite 8 y npm.
-2. Copia `.env.example` a `.env.local` y agrega la URL y la clave **publishable** del proyecto Supabase.
-3. Si aún no conectaste las experiencias, ejecuta `supabase/experiencias.sql` una sola vez. Después ejecuta `supabase/ecommerce.sql` desde Supabase SQL Editor. Si las experiencias ya funcionan, ejecuta solo el esquema de comercio.
-4. Inicia la web:
+Necesitas Node.js compatible con Vite 8 (20.19+ o 22.12+) y npm.
 
-```bash
-npm install
-npm run dev
-```
+1. Crea un proyecto en Supabase y ejecuta `supabase/experiencias.sql` desde su **SQL Editor**.
+2. Copia `.env.example` como `.env.local` y agrega la Project URL y la clave publishable de Supabase:
 
-## Seguridad y cuentas
+   ```dotenv
+   VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
+   VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+   ```
 
-- El acceso usa Supabase Auth con flujo PKCE. Supabase recibe la contraseña por HTTPS y la almacena con hash bcrypt; la aplicación no guarda ni calcula hashes de contraseñas.
-- El alta y la recuperación piden al menos 12 caracteres en la interfaz. Repite ese mínimo en **Authentication → Settings → Password** para que también se aplique en el servidor, y activa la comprobación de contraseñas filtradas si está disponible en el plan. Las cuentas existentes con contraseñas más cortas podrían necesitar restablecerlas al endurecer el requisito.
-- Las sesiones se mantienen con el cliente oficial de Supabase. El proveedor Google requiere credenciales OAuth propias configuradas en el panel de Supabase.
-- Las tablas del comercio tienen RLS y permisos explícitos. Cada cliente solo puede consultar o modificar sus propios datos; el catálogo activo es público.
-- El checkout, los precios finales, el inventario, el estado de los pedidos y las llamadas de pago deben ejecutarse en un backend confiable, como una Supabase Edge Function. No se guardan números completos de tarjeta, CVV ni claves secretas del proveedor en la web.
-- Nunca pongas una clave `service_role`, `secret` de Supabase ni credenciales privadas en variables `VITE_*`. `.env.local` está excluido de Git.
+3. Instala dependencias e inicia el sitio:
 
-## Esquema preparado para comercio
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-`supabase/ecommerce.sql` crea perfiles y domicilios, categorías, productos, variantes, imágenes, inventario, carritos, favoritos, pedidos y sus partidas e historial, pagos, entregas, métodos de pago, zonas de entrega, promociones, canjes y solicitudes de cotización. Las operaciones críticas de pago y compra quedan reservadas al backend; el archivo prepara la base de datos, no activa todavía el checkout.
+Abre `/experiencias` en el servidor local para revisar las opiniones y el formulario de aportes.
 
-Las rutas de tienda, producto, carrito, pago, entregas, pedidos, inventario, promociones y cotizaciones muestran el estado de “Próximamente” hasta que se construyan sus pantallas funcionales.
+## Despliegue
+
+El proyecto está configurado para Vercel. Importa el repositorio en Vercel, deja el directorio raíz como **Root Directory** y configura `npm run build` como comando de compilación y `dist` como directorio de salida. Agrega `VITE_SUPABASE_URL` y `VITE_SUPABASE_PUBLISHABLE_KEY` en las variables de entorno de Vercel y despliega. `vercel.json` permite que las rutas de React Router funcionen al abrirlas directamente.
+
+La clave publishable es para el navegador y las tablas están protegidas con RLS. No publiques `.env.local` ni uses una clave `service_role` o `secret` en variables `VITE_*`.
+
+Consulta [la guía completa de conexión a Supabase y despliegue en Vercel](supabase/README.md).
 
 ## Comandos
 
 | Comando | Descripción |
 | --- | --- |
-| `npm run dev` | Inicia el servidor de desarrollo. |
+| `npm run dev` | Inicia el servidor local de desarrollo. |
 | `npm run build` | Comprueba TypeScript y genera `dist/`. |
 | `npm run preview` | Previsualiza la compilación de producción. |
-
-Consulta [supabase/README.md](supabase/README.md) para la configuración de Auth, Google, experiencias y comercio.
+| `npm run lint` | Revisa el código con Oxlint. |

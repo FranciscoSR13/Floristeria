@@ -5,11 +5,21 @@ const imageBase = "/images/Nosotros/";
 
 const storyPhotos = [
   { file: "IMG_1688.JPEG", alt: "Paisaje de los campos de Atlixco al pie del volcán", caption: "La tierra donde crece nuestra historia" },
-  { file: "IMG_4721.jpg", alt: "Cultivo de flores bajo invernadero", caption: "Cuidado en cada etapa del cultivo" },
+  { file: "IMG_2771.jpg", alt: "Filas de cultivo preparadas para crecer", caption: "El cuidado comienza en cada surco" },
+  { file: "IMG_3160.jpg", alt: "Cultivos verdes con el volcán al fondo", caption: "Nuestros campos al pie del volcán" },
+  { file: "IMG_3201.jpg", alt: "Girasol creciendo entre sus hojas", caption: "Una flor que nace en nuestro campo" },
+  { file: "IMG_3343.jpg", alt: "Surcos de cultivo al caer la tarde", caption: "El campo sigue su propio ritmo" },
+  { file: "IMG_4534.jpg", alt: "Hileras de plantas en uno de nuestros cultivos", caption: "Cada temporada trae nuevos comienzos" },
+  { file: "IMG_4741.jpg", alt: "Flores cultivadas bajo un invernadero", caption: "Cuidado en cada etapa del cultivo" },
   { file: "IMG_4748.jpg", alt: "Lisianthus en tonos lila y blanco entre el follaje", caption: "Flores que inspiran nuevas creaciones" },
   { file: "IMG_2224.JPEG", alt: "Girasoles recién cosechados", caption: "Girasoles de nuestra tradición" },
-  { file: "B3668CED-4100-4B08-887F-80963CB3DC08.jpg", alt: "Familia trabajando en los cultivos de Atlixco", caption: "Una tradición compartida en familia" },
-  { file: "28ded4511ee49ffae334e2f996148837.jpeg", alt: "Manojos de flores listos para transportarse después de la cosecha", caption: "De la cosecha a nuevos destinos" },
+  { file: "IMG_4795.jpg", alt: "Atardecer sobre los cultivos y el volcán", caption: "Así termina un día en el campo" },
+  { file: "IMG_4796.jpg", alt: "Luz dorada sobre los campos de Atlixco", caption: "Paisajes que acompañan nuestra historia" },
+  { file: "IMG_4860.jpg", alt: "Girasol recién abierto en medio del cultivo", caption: "La belleza está en cada detalle" },
+  { file: "IMG_4862.jpg", alt: "Girasoles floreciendo entre las plantas del campo", caption: "Flores frescas desde su origen" },
+  { file: "IMG_8590.jpg", alt: "Dos personas recorriendo y revisando el cultivo", caption: "El trabajo diario que hay detrás de cada flor" },
+  { file: "B3668CED-4100-4B08-887F-80963CB3DC08.jpg", alt: "Personas trabajando entre los cultivos de Atlixco", caption: "Una tradición compartida en familia" },
+  { file: "28ded4511ee49ffae334e2f996148837.jpeg", alt: "Flores recién cortadas listas para su traslado", caption: "De la cosecha a nuevos destinos" },
   { file: "CFE70398-8F96-42BB-972F-F5FC644CC55A.jpg", alt: "Girasoles cosechados y acomodados para su traslado", caption: "Girasoles que alegran cada ocasión" },
 ];
 
@@ -19,8 +29,8 @@ function Nosotros() {
       <section className="about-story-hero">
         <img
           className="about-story-hero-image"
-          src={`${imageBase}IMG_2224.JPEG`}
-          alt="Girasoles recién cosechados, parte de nuestra historia familiar"
+          src={`${imageBase}IMG_4796.jpg`}
+          alt="Atardecer sobre los campos de Atlixco al pie del volcán"
         />
         <div className="about-story-hero-shade" />
         <div className="about-story-hero-copy">
@@ -40,7 +50,7 @@ function Nosotros() {
             <img
               className="about-origin-photo"
               src={`${imageBase}B3668CED-4100-4B08-887F-80963CB3DC08.jpg`}
-              alt="Nuestra familia trabaja entre los cultivos de Atlixco"
+              alt="Girasoles creciendo entre las plantas de nuestro cultivo"
               loading="lazy"
             />
             <span className="about-origin-photo-credit">Foto: Isabella Floristería</span>
@@ -104,8 +114,8 @@ function Nosotros() {
           </div>
           <figure className="about-moments-photo">
             <img
-              src={`${imageBase}CFE70398-8F96-42BB-972F-F5FC644CC55A.jpg`}
-              alt="Girasoles cultivados por nuestra familia listos para alegrar un día especial"
+              src={`${imageBase}IMG_4741.jpg`}
+              alt="Flores cultivadas bajo techo que inspiran nuestros arreglos personalizados"
               loading="lazy"
             />
             <figcaption><Heart size={15} aria-hidden="true" /> Cada flor guarda una historia <small>Foto: Isabella Floristería</small></figcaption>

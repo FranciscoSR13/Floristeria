@@ -11,13 +11,6 @@ const categories = [
   { name: "Regalos", icon: Gift, image: "photo-1490750967868-88aa4486c946" },
 ];
 
-const bouquets = [
-  { name: "Ramo Siempre contigo", price: "$890", tag: "Favorito", image: "photo-1520763185298-1b434c919102" },
-  { name: "Atardecer de jardín", price: "$1,190", tag: "Nuevo", image: "photo-1490750967868-88aa4486c946" },
-  { name: "Dulce momento", price: "$760", tag: "Desde $760", image: "photo-1525310072745-f49212b5ac6d" },
-  { name: "Rosas para ti", price: "$1,350", tag: "Más vendido", image: "photo-1518895949257-7621c3c786d7" },
-];
-
 const photo = (id: string, width = 900) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=85`;
 const facebookUrl = "https://www.facebook.com/profile.php?id=61594027933855&locale=es_LA";
 
@@ -63,10 +56,11 @@ function Home() {
 
       </section>
       <section className="home-screen-panel home-screen-two" ref={secondPanelRef}>
-      <section className="products-section">
-        <div className="section-container">
-          <div className="section-heading-store"><div><span className="eyebrow pink">FAVORITOS DE LA FLORISTERÍA</span><h2>Flores para regalar hoy</h2><p className="section-intro">Diseñadas una a una, con flores de temporada y mucho amor.</p></div><Link to="/trabajos" className="subtle-link">Explorar colección <ArrowRight size={16} /></Link></div>
-          <div className="product-row">{bouquets.map((item) => <Link to="/trabajos" className="product-tile" key={item.name}><span className="product-image"><img src={photo(item.image, 650)} alt={item.name} /><span className="product-tag">{item.tag}</span><span className="quick-add">Ver arreglo <ArrowRight size={15} /></span></span><span className="product-meta"><strong>{item.name}</strong><b>{item.price}</b></span><span className="product-caption">Arreglo floral · Envío disponible</span></Link>)}</div>
+      <section className="home-facebook-section">
+        <div className="home-facebook-card">
+          <span className="home-facebook-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.4 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.6 1.6-1.6H17V3.5c-.4-.1-1.4-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.4H7.5V13h2.8v8h3.1Z" /></svg></span>
+          <div><span className="eyebrow pink">SIGAMOS EN CONTACTO</span><h2>También estamos en Facebook</h2><p>Visita nuestra página para ver novedades, flores y momentos de Isabella Floristería.</p></div>
+          <a className="home-facebook-link" href={facebookUrl} target="_blank" rel="noreferrer">Visitar Facebook <ArrowRight size={16} aria-hidden="true" /></a>
         </div>
       </section>
 
@@ -80,13 +74,6 @@ function Home() {
       <section className="occasion-section section-container"><div className="occasion-image promo-image"><img src="/images/Promocion_img.jpg" alt="Promoción especial de Isabella Floristería: ramo con globo, lazo y tarjeta personalizada" /></div><div className="occasion-copy"><span className="eyebrow pink">UN MOTIVO PARA SONREÍR</span><h2>Haz que hoy<br />se sienta especial.</h2><p>Un cumpleaños, un gracias o simplemente porque sí. Elige tus flores favoritas y nosotros nos encargamos de hacerlas llegar.</p><Link to="/contacto" className="store-button">Personaliza tu pedido <ArrowRight size={17} /></Link><div className="occasion-foot"><Heart size={15} fill="currentColor" /> Preparado con cariño en Atlixco, Puebla</div></div></section>
       </section>
 
-      <section className="home-facebook-section">
-        <div className="home-facebook-card">
-          <span className="home-facebook-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.4 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.6 1.6-1.6H17V3.5c-.4-.1-1.4-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.4H7.5V13h2.8v8h3.1Z" /></svg></span>
-          <div><span className="eyebrow pink">SIGAMOS EN CONTACTO</span><h2>También estamos en Facebook</h2><p>Visita nuestra página para ver novedades, flores y momentos de Isabella Floristería.</p></div>
-          <a className="home-facebook-link" href={facebookUrl} target="_blank" rel="noreferrer">Visitar Facebook <ArrowRight size={16} aria-hidden="true" /></a>
-        </div>
-      </section>
     </div>
   );
 }

@@ -1,0 +1,143 @@
+/* Navegación que se aparta al bajar y vuelve al subir */
+.navbar {
+  position: sticky;
+  top: 0;
+  transition: transform 320ms cubic-bezier(.22, .75, .25, 1), box-shadow 320ms ease;
+  will-change: transform;
+}
+
+.navbar.navbar-hidden {
+  transform: translate3d(0, -110%, 0);
+  box-shadow: none;
+  pointer-events: none;
+}
+
+/* Entrada breve al cambiar de pantalla */
+.route-screen-content {
+  animation: route-screen-enter 460ms cubic-bezier(.2, .72, .25, 1);
+}
+
+@keyframes route-screen-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Aparición progresiva de las secciones al entrar en el área visible */
+.route-screen-content .scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity 620ms ease var(--scroll-reveal-delay, 0ms),
+    transform 620ms cubic-bezier(.2, .72, .25, 1) var(--scroll-reveal-delay, 0ms);
+}
+
+.route-screen-content .scroll-reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar {
+    transition: none;
+  }
+
+  .route-screen-content {
+    animation: none;
+  }
+
+  .route-screen-content .scroll-reveal,
+  .route-screen-content .scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Facebook ocupa el segundo panel de Inicio */
+.home-screen-two .home-facebook-section {
+  width: 100%;
+  min-height: 320px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 44px);
+  background: #fbf5f2;
+  scroll-snap-align: none;
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 650ms ease, transform 650ms cubic-bezier(.2, .72, .25, 1);
+}
+
+.home-screen-two .home-facebook-card {
+  width: 100%;
+}
+
+.home-screen-two.is-in-view .home-facebook-section {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 120ms;
+}
+
+@media (max-width: 850px) {
+  .home-screen-two .home-facebook-section {
+    min-height: clamp(290px, 45vh, 420px);
+    flex: none;
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-screen-two .home-facebook-section {
+    min-height: clamp(270px, 42vh, 360px);
+    padding: 20px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-screen-two .home-facebook-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Inicio fluye según el contenido, sin paneles vacíos a pantalla completa */
+html:has(.storefront) {
+  scroll-snap-type: none;
+}
+
+.storefront .home-screen-panel {
+  height: auto;
+  min-height: 0;
+  justify-content: flex-start;
+  overflow: visible;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
+}
+
+.storefront .home-screen-one .category-section,
+.storefront .home-screen-two .home-facebook-section,
+.storefront .home-screen-three .promise-band,
+.storefront .home-screen-four .occasion-section {
+  flex: none;
+}
+
+.storefront .home-screen-two .home-facebook-section {
+  min-height: 0;
+  padding-block: 20px;
+}
+
+@media (max-width: 850px) {
+  .storefront .home-screen-two .home-facebook-section {
+    min-height: 0;
+    padding-block: 20px;
+  }
+}

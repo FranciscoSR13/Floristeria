@@ -1,16 +1,13 @@
 import { type FormEvent, useEffect, useMemo, useState } from "react";
-import { Camera, Heart, LogOut, MessageCircle, Send, ShieldCheck, Star, Upload, X } from "lucide-react";
+import { Camera, Heart, MessageCircle, Send, Star, Upload, X } from "lucide-react";
 import {
   getCustomerReviews,
   isSupabaseConfigured,
-  replyToCustomerReview,
-  signInFlorist,
   submitCustomerReview,
   type CustomerReview,
 } from "../services/supabase";
 
 const ratingLabels = ["", "Necesita mejorar", "Regular", "Bueno", "Muy bueno", "¡Excelente!"];
-
 function Experiencias() {
   const [reviews, setReviews] = useState<CustomerReview[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,14 +20,6 @@ function Experiencias() {
   const [submitting, setSubmitting] = useState(false);
   const [formMessage, setFormMessage] = useState("");
   const [formError, setFormError] = useState(false);
-  const [adminOpen, setAdminOpen] = useState(false);
-  const [adminEmail, setAdminEmail] = useState("");
-  const [adminPassword, setAdminPassword] = useState("");
-  const [adminToken, setAdminToken] = useState("");
-  const [adminMessage, setAdminMessage] = useState("");
-  const [adminError, setAdminError] = useState(false);
-  const [replyDrafts, setReplyDrafts] = useState<Record<number, string>>({});
-  const [savingReply, setSavingReply] = useState<number | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -57,7 +46,8 @@ function Experiencias() {
     const counts = [0, 0, 0, 0, 0, 0];
     let total = 0;
     for (const review of reviews) { counts[review.rating] += 1; total += review.rating; }
-    return { counts, average: reviews.length ? total / reviews.length : 0 };
+    const satisfaction = reviews.length ? Math.round(((counts[4] + counts[5]) / reviews.length) * 100) : 0;
+    return { counts, average: reviews.length ? total / reviews.length : 0, satisfaction };
   }, [reviews]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -86,30 +76,6 @@ function Experiencias() {
     } finally { setSubmitting(false); }
   }
 
-  async function handleFloristLogin(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault(); setAdminMessage(""); setAdminError(false);
-    try {
-      setAdminToken(await signInFlorist(adminEmail, adminPassword));
-      setAdminPassword(""); setAdminMessage("Sesión de floristería iniciada. Ya puedes responder a las reseñas.");
-    } catch (error) {
-      setAdminError(true); setAdminMessage(error instanceof Error ? error.message : "No se pudo iniciar sesión.");
-    }
-  }
-
-  async function handleReply(id: number) {
-    const reply = replyDrafts[id]?.trim();
-    if (!adminToken || !reply) return;
-    setSavingReply(id); setAdminMessage(""); setAdminError(false);
-    try {
-      await replyToCustomerReview(id, reply, adminToken);
-      setReviews((previous) => previous.map((review) => review.id === id ? { ...review, florist_reply: reply } : review));
-      setReplyDrafts((previous) => ({ ...previous, [id]: "" }));
-      setAdminMessage("Respuesta publicada.");
-    } catch (error) {
-      setAdminError(true); setAdminMessage(error instanceof Error ? error.message : "No se pudo publicar la respuesta.");
-    } finally { setSavingReply(null); }
-  }
-
   return (
     <main className="experiences-page">
       <section className="page-header experiences-header">
@@ -125,11 +91,23 @@ function Experiencias() {
         <div className="section-container satisfaction-layout">
           <div className="satisfaction-summary">
             <span className="section-label">OPINIONES DE CLIENTES</span>
-            <h2 id="satisfaction-heading">La alegría de regalar flores</h2>
-            {reviews.length ? <>
+            <h2 id="satisfaction-heading">La satisfacción de nuestros clientes</h2>
+            {loading ? <p className="satisfaction-callout">Cargando las calificaciones de nuestros clientes…</p> : reviews.length ? <>
               <div className="average-rating"><strong>{ratingSummary.average.toFixed(1)}</strong><div><div className="experience-rating" aria-label={`${ratingSummary.average.toFixed(1)} de 5 estrellas`}>{[1, 2, 3, 4, 5].map((star) => <Star key={star} size={20} fill={star <= Math.round(ratingSummary.average) ? "currentColor" : "none"} />)}</div><span>Basado en {reviews.length} {reviews.length === 1 ? "experiencia" : "experiencias"}</span></div></div>
-              <p className="satisfaction-callout">{Math.round(((ratingSummary.counts[4] + ratingSummary.counts[5]) / reviews.length) * 100)}% de nuestros clientes califican su experiencia con 4 o 5 estrellas.</p>
-            </> : <p className="satisfaction-callout">Sé la primera persona en compartir cómo fue recibir un ramo de Isabella Floristería.</p>}
+              <div className="satisfaction-gauge-row">
+                <div className="satisfaction-gauge" role="img" aria-label={`${ratingSummary.satisfaction}% de nuestros clientes están satisfechos con nuestro trabajo`}>
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <circle className="satisfaction-gauge-track" cx="60" cy="60" r="48" pathLength="100" />
+                    <circle className="satisfaction-gauge-value" cx="60" cy="60" r="48" pathLength="100" strokeDasharray={`${ratingSummary.satisfaction} 100`} />
+                  </svg>
+                  <strong>{ratingSummary.satisfaction}%</strong>
+                </div>
+                <div className="satisfaction-gauge-copy">
+                  <p><strong>de nuestros clientes están satisfechos con nuestro trabajo.</strong></p>
+                  <span>Consideramos satisfechas las calificaciones de 4 y 5 estrellas. Basado en {reviews.length} {reviews.length === 1 ? "opinión" : "opiniones"}.</span>
+                </div>
+              </div>
+            </> : <p className="satisfaction-callout">Aún no hay calificaciones para calcular la satisfacción. Sé la primera persona en compartir su experiencia.</p>}
           </div>
           <div className="rating-chart" aria-label="Distribución de puntuaciones">
             {[5, 4, 3, 2, 1].map((stars) => {
@@ -166,10 +144,9 @@ function Experiencias() {
 
       <section className="section published-reviews-section">
         <div className="section-container">
-          <div className="section-heading reviews-heading"><div><span className="section-label">FOTOS Y OPINIONES REALES</span><h2>Lo que comparte nuestra comunidad</h2></div><button type="button" className="florist-access-button" onClick={() => setAdminOpen((open) => !open)}><ShieldCheck size={17} /> Responder como floristería</button></div>
-          {adminOpen && <div className="florist-panel"><div><ShieldCheck size={21} /><p><strong>Acceso de la floristería</strong><span>Inicia sesión para responder públicamente a las experiencias.</span></p></div>{adminToken ? <button type="button" className="florist-logout" onClick={() => { setAdminToken(""); setAdminMessage("Sesión cerrada."); }}><LogOut size={16} /> Cerrar sesión</button> : <form onSubmit={handleFloristLogin}><input type="email" required aria-label="Correo de la floristería" placeholder="Correo de acceso" value={adminEmail} onChange={(event) => setAdminEmail(event.target.value)} /><input type="password" required aria-label="Contraseña de la floristería" placeholder="Contraseña" value={adminPassword} onChange={(event) => setAdminPassword(event.target.value)} /><button type="submit">Iniciar sesión</button></form>}{adminMessage && <p className={adminError ? "review-status error" : "review-status success"} role="status">{adminMessage}</p>}</div>}
+          <div className="section-heading reviews-heading"><div><span className="section-label">FOTOS Y OPINIONES REALES</span><h2>Lo que comparte nuestra comunidad</h2></div></div>
           {!isSupabaseConfigured && <div className="reviews-notice">{loadError}</div>}
-          {loading ? <p className="reviews-empty">Cargando experiencias…</p> : reviews.length ? <div className="experiences-grid">{reviews.map((review) => <article className="experience-card" key={review.id}><div className="experience-image-placeholder"><img src={review.image_url} alt={`Ramo compartido por ${review.name}`} loading="lazy" /></div><div className="experience-info"><div className="experience-rating" aria-label={`${review.rating} de 5 estrellas`}>{[1, 2, 3, 4, 5].map((star) => <Star key={star} size={17} fill={star <= review.rating ? "currentColor" : "none"} />)}</div><p className="review-comment">{review.comment}</p><div className="review-byline"><strong>{review.name}</strong><time dateTime={review.created_at}>{new Intl.DateTimeFormat("es-MX", { dateStyle: "medium" }).format(new Date(review.created_at))}</time></div>{review.florist_reply && <div className="florist-reply"><strong>Respuesta de Isabella Floristería</strong><p>{review.florist_reply}</p></div>}{adminToken && <div className="reply-editor"><textarea aria-label={`Respuesta para ${review.name}`} rows={3} maxLength={1200} placeholder={review.florist_reply ? "Actualizar respuesta pública…" : "Escribe una respuesta pública…"} value={replyDrafts[review.id] ?? review.florist_reply ?? ""} onChange={(event) => setReplyDrafts((previous) => ({ ...previous, [review.id]: event.target.value }))} /><button type="button" disabled={savingReply === review.id || !(replyDrafts[review.id] ?? review.florist_reply ?? "").trim()} onClick={() => void handleReply(review.id)}><Send size={15} />{savingReply === review.id ? "Publicando…" : "Publicar respuesta"}</button></div>}</div></article>)}</div> : <div className="reviews-empty"><Heart size={25} /><p>Aún no hay experiencias publicadas. ¡Tu foto y tu opinión pueden ser las primeras!</p></div>}
+          {loading ? <p className="reviews-empty">Cargando experiencias…</p> : reviews.length ? <div className="experiences-grid">{reviews.map((review) => <article className="experience-card" key={review.id}><div className="experience-image-placeholder"><img src={review.image_url} alt={`Ramo compartido por ${review.name}`} loading="lazy" /></div><div className="experience-info"><div className="experience-rating" aria-label={`${review.rating} de 5 estrellas`}>{[1, 2, 3, 4, 5].map((star) => <Star key={star} size={17} fill={star <= review.rating ? "currentColor" : "none"} />)}</div><p className="review-comment">{review.comment}</p><div className="review-byline"><strong>{review.name}</strong><time dateTime={review.created_at}>{new Intl.DateTimeFormat("es-MX", { dateStyle: "medium" }).format(new Date(review.created_at))}</time></div>{review.florist_reply && <div className="florist-reply"><strong>Respuesta de Isabella Floristería</strong><p>{review.florist_reply}</p></div>}</div></article>)}</div> : <div className="reviews-empty"><Heart size={25} /><p>Aún no hay experiencias publicadas. ¡Tu foto y tu opinión pueden ser las primeras!</p></div>}
           {loadError && isSupabaseConfigured && <p className="review-status error" role="status">No se pudieron cargar las reseñas: {loadError}</p>}
         </div>
       </section>

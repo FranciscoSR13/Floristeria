@@ -19,7 +19,6 @@ function Footer() {
           <Link to="/nosotros">Nosotros</Link>
           <Link to="/experiencias">Experiencias</Link>
           <Link to="/contacto">Contacto</Link>
-          <Link to="/login">Iniciar sesión</Link>
           <Link to="/contacto#ayuda">Pedidos personalizados</Link>
           <Link to="/metodos-de-pago">Métodos de pago</Link>
         </div>

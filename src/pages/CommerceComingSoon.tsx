@@ -1,4 +1,4 @@
-import { ArrowRight, Check, ClipboardList, CreditCard, PackageCheck, ShieldCheck, ShoppingBag, Truck, UserRound } from "lucide-react";
+import { ArrowRight, Check, ClipboardList, CreditCard, PackageCheck, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const commerceModules = [
@@ -8,7 +8,6 @@ const commerceModules = [
   { path: "/pago", label: "Finalizar compra", description: "Datos de entrega, confirmación del pedido y comprobante.", icon: CreditCard },
   { path: "/metodos-de-pago", label: "Métodos de pago", description: "Opciones de pago seguras y confirmación de transacciones.", icon: CreditCard },
   { path: "/entregas", label: "Entregas", description: "Cobertura, fecha, horario y seguimiento de entrega.", icon: Truck },
-  { path: "/cuenta", label: "Cuenta de cliente", description: "Datos de contacto, pedidos anteriores y direcciones guardadas.", icon: UserRound },
   { path: "/pedidos", label: "Pedidos y seguimiento", description: "Estado de preparación, entrega y notificaciones del pedido.", icon: PackageCheck },
   { path: "/inventario", label: "Inventario", description: "Disponibilidad de flores, productos y materiales para cada temporada.", icon: ClipboardList },
   { path: "/promociones", label: "Promociones", description: "Ofertas, fechas especiales y códigos de descuento.", icon: Check },
