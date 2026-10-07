@@ -7,6 +7,7 @@ import Nosotros from "./pages/Nosotros";
 import Experiencias from "./pages/Experiencias";
 import Contacto from "./pages/Contacto";
 import CommerceComingSoon from "./pages/CommerceComingSoon";
+import Admin from "./pages/Admin";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -41,6 +42,7 @@ function App() {
           <Route path="/inventario" element={<CommerceComingSoon />} />
           <Route path="/promociones" element={<CommerceComingSoon />} />
           <Route path="/cotizacion" element={<Navigate to="/contacto#ayuda" replace />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>
