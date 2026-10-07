@@ -97,3 +97,30 @@ export async function replyToCustomerReview(id: number, reply: string, token: st
   });
   if (!response.ok) throw new Error(await readError(response));
 }
+
+export async function deleteCustomerReview(
+  id: number,
+  imageUrl: string,
+  token: string,
+): Promise<boolean> {
+  const { url } = requireConfig();
+  const response = await fetch(`${url}/rest/v1/customer_reviews?id=eq.${id}&select=id`, {
+    method: "DELETE",
+    headers: { ...publicHeaders(token), Prefer: "return=representation" },
+  });
+  if (!response.ok) throw new Error(await readError(response));
+
+  const deletedRows = await response.json() as Array<{ id: number }>;
+  if (deletedRows.length === 0) {
+    throw new Error("No se pudo eliminar la rese\u00F1a. Comprueba los permisos de la cuenta.");
+  }
+
+  const objectName = new URL(imageUrl).pathname.split("/").filter(Boolean).pop();
+  if (!objectName) return true;
+
+  const photoResponse = await fetch(
+    `${url}/storage/v1/object/ramilletes-clientes/${encodeURIComponent(objectName)}`,
+    { method: "DELETE", headers: publicHeaders(token) },
+  );
+  return photoResponse.ok;
+}

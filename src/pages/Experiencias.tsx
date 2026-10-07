@@ -69,7 +69,7 @@ function Experiencias() {
       const created = await submitCustomerReview({ name, rating, comment, photo });
       setReviews((previous) => [created, ...previous]);
       setName(""); setRating(0); setComment(""); setPhoto(null);
-      setFormMessage("¡Gracias! Tu foto y experiencia ya están publicadas.");
+      setFormMessage("¡Tu comentario y foto se publicaron correctamente! Gracias por compartir tu experiencia.");
     } catch (error) {
       setFormError(true);
       setFormMessage(error instanceof Error ? error.message : "No se pudo enviar tu experiencia. Intenta de nuevo.");
