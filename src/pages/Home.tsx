@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ArrowRight, BadgeCheck, CakeSlice, ChevronRight, Clock3, Flower2, Gift, Heart, MapPin, PackageCheck, Sparkles, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, ChevronRight, Clock3, Flower2, Heart, MapPin, PackageCheck, Sparkles, Truck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const categories = [
