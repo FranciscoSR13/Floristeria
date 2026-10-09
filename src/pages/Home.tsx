@@ -3,15 +3,15 @@ import { ArrowRight, BadgeCheck, CakeSlice, ChevronRight, Clock3, Flower2, Gift,
 import { Link } from "react-router-dom";
 
 const categories = [
-  { name: "Ramos", icon: Flower2, image: "photo-1490750967868-88aa4486c946" },
-  { name: "Para celebrar", icon: Sparkles, image: "photo-1523438885200-e635ba2c371e" },
-  { name: "Cumpleaños", icon: CakeSlice, image: "photo-1513151233558-d860c5398176" },
-  { name: "Amor", icon: Heart, image: "photo-1518895949257-7621c3c786d7" },
-  { name: "Plantas", icon: Flower2, image: "photo-1485955900006-10f4d324d411" },
-  { name: "Regalos", icon: Gift, image: "photo-1490750967868-88aa4486c946" },
+  { name: "Ramos", icon: Flower2, image: "/images/Flores%20disp/Ramos.jpg" },
+  { name: "Girasoles", icon: Flower2, image: "/images/Flores%20disp/Girasoles.jpg" },
+  { name: "Gladiolas", icon: Flower2, image: "/images/Flores%20disp/Gradiolas.jpg" },
+  { name: "Centros de mesa", icon: Flower2, image: "/images/Flores%20disp/Centros%20de%20mesa.jpg" },
+  { name: "Cempasúchitl y terciopelo por manojo", icon: Flower2, image: "/images/Flores%20disp/cempasuchitl%20y%20terciopelo%20por%20manojo.jpg" },
+  { name: "Macetas de cempasúchitl", icon: Flower2, image: "/images/Flores%20disp/MacetasCempasuchitl.jpg" },
 ];
 
-const photo = (id: string, width = 900) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=85`;
+
 const facebookUrl = "https://www.facebook.com/profile.php?id=61594027933855&locale=es_LA";
 
 function Home() {
@@ -50,10 +50,41 @@ function Home() {
       </section>
 
       <section className="category-section section-container">
-        <div className="section-heading-store"><div><span className="eyebrow pink">ENCUENTRA EL DETALLE IDEAL</span><h2>¿Qué quieres celebrar?</h2></div><Link to="/trabajos" className="subtle-link">Ver todos <ArrowRight size={16} /></Link></div>
-        <div className="category-row">{categories.map(({ name, icon: Icon, image }) => <Link to="/trabajos" className="category-tile" key={name}><span className="category-image"><img src={photo(image, 360)} alt="" /><span className="category-icon"><Icon size={17} /></span></span><span className="category-name">{name}</span></Link>)}</div>
+        <div className="section-heading-store"><div><span className="eyebrow pink">SIEMPRE DISPONIBLES</span><h2>Flores que siempre tenemos</h2></div><Link to="/trabajos" className="subtle-link">Ver todos <ArrowRight size={16} /></Link></div>
+        <p style={{ margin: "-10px 0 22px", color: "#796e6c", fontSize: 13, lineHeight: 1.6 }}>Los precios de nuestras flores varían según el día y la temporada. Por eso no manejamos precios fijos; contáctanos para cotizar.</p>
+        <div className="category-row">{categories.map(({ name, icon: Icon, image }) => <Link to="/contacto#ayuda" className="category-tile" key={name}><span className="category-image"><img src={image} alt="" /><span className="category-icon"><Icon size={17} /></span></span><span className="category-name">{name}</span></Link>)}</div>
       </section>
 
+      </section>
+      <section className="home-screen-panel home-screen-season">
+        <section className="seasonal-section">
+          <div className="seasonal-heading">
+            <span className="seasonal-kicker"><Sparkles size={15} /> FLORES DE TEMPORADA</span>
+            <h2>Tradición que florece.</h2>
+            <p>Se acerca Día de Muertos: recibimos la temporada con los tonos intensos del cempasúchil y el terciopelo. Y pronto, el rojo festivo de las nochebuenas.</p>
+          </div>
+          <div className="seasonal-cards">
+            <article className="seasonal-card seasonal-card-marigold">
+              <img src="/images/Flores%20disp/MacetasCempasuchitl.jpg" alt="Maceta de flores de cempasúchil" loading="lazy" />
+              <div className="seasonal-card-shade" />
+              <span className="seasonal-badge">EN TEMPORADA</span>
+              <div className="seasonal-card-copy"><span>01 · DÍA DE MUERTOS</span><h3>Cempasúchil</h3><p>El naranja que guía los recuerdos.</p></div>
+            </article>
+            <article className="seasonal-card seasonal-card-velvet">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKNXk5s2ScKP3Z94Bs-gcX5Y405nIFW1uWPyhG8tZRzw&s=10" alt="Flor de terciopelo" loading="lazy" />
+              <div className="seasonal-card-shade" />
+              <span className="seasonal-badge">EN TEMPORADA</span>
+              <div className="seasonal-card-copy"><span>02 · COLOR Y TEXTURA</span><h3>Terciopelo</h3><p>Un toque profundo para tu ofrenda.</p></div>
+            </article>
+            <article className="seasonal-card seasonal-card-poinsettia">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDj97EbmnZGQccZKy8TkqJdRwxJvQHDNLZu7cway6hUQ&s=10" alt="Nochebuena roja" loading="lazy" />
+              <div className="seasonal-card-shade" />
+              <span className="seasonal-badge seasonal-badge-soon">PRÓXIMAMENTE</span>
+              <div className="seasonal-card-copy"><span>03 · SE ACERCA NAVIDAD</span><h3>Nochebuenas</h3><p>Muy pronto llegará su rojo brillante.</p></div>
+            </article>
+          </div>
+          <Link className="seasonal-cta" to="/contacto#ayuda">Pregunta por las flores de temporada <ArrowRight size={16} /></Link>
+        </section>
       </section>
       <section className="home-screen-panel home-screen-two" ref={secondPanelRef}>
       <section className="home-facebook-section">

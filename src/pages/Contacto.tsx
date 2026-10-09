@@ -35,7 +35,7 @@ function Contacto() {
             <span className="contact-kicker">ESTAMOS PARA AYUDARTE</span>
             <h1>Hablemos de<br /><em>algo bonito.</em></h1>
             <p>Cuéntanos qué quieres celebrar. Te orientamos para crear un arreglo especial y coordinar cada detalle.</p>
-            <a className="contact-whatsapp-cta" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"><MessageCircle size={20} /> Escribir por WhatsApp <ArrowRight size={17} /></a>
+            <Link className="contact-whatsapp-cta" to="/contacto#ayuda"><MessageCircle size={20} /> Escribir por WhatsApp <ArrowRight size={17} /></Link>
           </div>
           <div className="contact-hero-note"><span className="contact-note-flower">✿</span><p>Un detalle pensado<br />con cariño cambia el día.</p><span>ISABELLA FLORISTERÍA · ATLIXCO</span></div>
         </div>
@@ -64,7 +64,7 @@ function Contacto() {
                 <div className="form-group"><label htmlFor="nombre">Tu nombre</label><input id="nombre" name="nombre" type="text" placeholder="¿Cómo te llamas?" autoComplete="name" required /></div>
                 <div className="form-group"><label htmlFor="telefono">Teléfono <span>(opcional)</span></label><input id="telefono" name="telefono" type="tel" placeholder="Tu número" autoComplete="tel" /></div>
               </div>
-              <div className="form-group"><label htmlFor="asunto">¿Qué necesitas?</label><select id="asunto" name="asunto" defaultValue="" required><option value="" disabled>Elige un motivo</option><option>Cotizar un arreglo</option><option>Diseño para evento</option><option>Consultar una entrega</option><option>Información sobre flores</option><option>Otro motivo</option></select></div>
+              <div className="form-group"><label htmlFor="asunto">&iquest;Qu&eacute; necesitas?</label><select id="asunto" name="asunto" defaultValue="" required><option value="" disabled>Elige un motivo</option><option>Cotizar un arreglo</option><option>Ramos</option><option>Girasoles</option><option>Gladiolas</option><option>Centros de mesa</option><option>Macetas de cempasuchitl</option><option>Cempas&uacute;chil y terciopelo por manojo</option><option>Cempas&uacute;chil</option><option>Terciopelo</option><option>Nochebuenas</option><option>Consultar una entrega</option><option>Otro motivo</option></select></div>
               <div className="form-group"><label htmlFor="mensaje">Cuéntanos un poco más</label><textarea id="mensaje" name="mensaje" rows={5} minLength={8} placeholder="Describe tu idea, ocasión o pregunta…" required /></div>
               <button type="submit" className="contact-send-button"><Send size={17} /> Continuar por WhatsApp</button>
               <small className="contact-form-footnote">Tu mensaje se enviará a Isabella Floristería por WhatsApp.</small>
