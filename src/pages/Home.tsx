@@ -33,7 +33,7 @@ function Home() {
   return (
     <div className="storefront">
       <section className="home-screen-panel home-screen-one" ref={firstPanelRef}>
-      <div className="delivery-strip"><Truck size={15} /> Flores frescas y entregas el mismo día <span>·</span> Hecho con cariño en Atlixco, Puebla</div>
+      <div className="delivery-strip"><span className="delivery-message"><Truck size={15} aria-hidden="true" /> Flores frescas y entregas el mismo d&iacute;a</span><span className="delivery-separator" aria-hidden="true">&middot;</span><span className="delivery-origin">Hecho con cari&ntilde;o en Atlixco, Puebla</span></div>
       <section className="store-hero image-hero">
         <img className="hero-photo" src="/images/IMG_inicioweb.png" alt="Isabella Floristería: Flores eternas, tus momentos; arreglo floral en tonos rosas" />
         <div className="delivery-card quote-card">
