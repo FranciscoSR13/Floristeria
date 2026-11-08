@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { ArrowRight, BadgeCheck, ChevronRight, Clock3, Flower2, Heart, MapPin, PackageCheck, Sparkles, Truck } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -7,12 +7,82 @@ const categories = [
   { name: "Girasoles", icon: Flower2, image: "/images/Flores%20disp/Girasoles.jpg" },
   { name: "Gladiolas", icon: Flower2, image: "/images/Flores%20disp/Gradiolas.jpg" },
   { name: "Centros de mesa", icon: Flower2, image: "/images/Flores%20disp/Centros%20de%20mesa.jpg" },
-  { name: "Cempasúchitl y terciopelo por manojo", icon: Flower2, image: "/images/Flores%20disp/cempasuchitl%20y%20terciopelo%20por%20manojo.jpg" },
-  { name: "Macetas de cempasúchitl", icon: Flower2, image: "/images/Flores%20disp/MacetasCempasuchitl.jpg" },
 ];
 
 
 const facebookUrl = "https://www.facebook.com/profile.php?id=61594027933855&locale=es_LA";
+
+function Snowfall() {
+  const [flakes] = useState<CSSProperties[]>(() => Array.from({ length: 60 }, () => {
+    const duration = 7 + Math.random() * 8;
+    const sway = () => `${Math.round((Math.random() - 0.5) * 90)}px`;
+    const spin = Math.random() < 0.5 ? -1 : 1;
+
+    return {
+      left: `${2 + Math.random() * 96}%`,
+      fontSize: `${12 + Math.random() * 17}px`,
+      animationDelay: `${-Math.random() * duration}s`,
+      animationDuration: `${duration}s`,
+      "--snow-sway-one": sway(),
+      "--snow-sway-two": sway(),
+      "--snow-sway-three": sway(),
+      "--snow-sway-end": sway(),
+      "--snow-rotation-one": `${spin * (40 + Math.random() * 130)}deg`,
+      "--snow-rotation-two": `${spin * (150 + Math.random() * 180)}deg`,
+      "--snow-rotation-three": `${spin * (280 + Math.random() * 260)}deg`,
+      "--snow-rotation-end": `${spin * (400 + Math.random() * 360)}deg`,
+    } as CSSProperties;
+  }));
+
+  return (
+    <div className="snowfall-layer" aria-hidden="true">
+      {flakes.map((style, index) => (
+        <span
+          className="snowflake"
+          key={index}
+          style={style}
+        >
+          ❄
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function HolidayGarland() {
+  const bulbs = [
+    { x: 70, y: 40 }, { x: 190, y: 54 }, { x: 310, y: 55 }, { x: 430, y: 37 },
+    { x: 550, y: 27 }, { x: 670, y: 28 }, { x: 790, y: 48 }, { x: 910, y: 56 },
+    { x: 1030, y: 55 }, { x: 1150, y: 39 },
+  ];
+
+  return (
+    <svg className="holiday-garland" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
+      <path className="holiday-garland-wire" d="M0 35 C100 35 200 67 300 56 C400 45 500 22 600 25 C700 28 800 58 900 56 C1000 60 1100 44 1200 35" />
+      {bulbs.map(({ x, y }, index) => (
+        <g className={`holiday-bulb holiday-bulb-${index % 4}`} key={x} style={{ animationDelay: `${index * 0.24}s` }}>
+          <line className="holiday-bulb-stem" x1={x} y1={y - 9} x2={x} y2={y - 2} />
+          <circle className="holiday-bulb-glass" cx={x} cy={y + 4} r="6" />
+          <circle className="holiday-bulb-glint" cx={x - 2} cy={y + 2} r="1.5" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function HolidayBranch({ className }: { className: string }) {
+  return (
+    <svg className={`holiday-branch ${className}`} viewBox="0 0 180 150" fill="none" aria-hidden="true">
+      <path className="holiday-branch-stem" d="M8 141C48 118 96 72 172 7" />
+      <path className="holiday-branch-needles" d="M27 129L12 103M34 125L56 134M49 111L29 83M58 105L82 112M75 89L54 59M84 82L108 89M101 67L81 38M111 60L135 68M128 44L116 18M138 37L160 42M18 109L8 107M18 109L14 120M44 117L32 108M44 117L41 130M67 96L54 87M67 96L65 109M91 75L79 66M91 75L89 87M116 53L105 44M116 53L115 65M143 31L134 23M143 31L143 42" />
+      <path className="holiday-branch-leaf" d="M55 108C42 94 43 81 53 78C62 76 67 84 68 93C73 79 88 77 92 85C96 94 87 100 78 102C92 101 98 113 89 119C82 124 72 118 68 112C62 125 49 124 47 116C46 112 49 109 55 108Z" />
+      <path className="holiday-branch-leaf" d="M105 65C94 53 96 41 105 39C112 37 117 44 118 52C123 40 136 39 140 47C143 54 135 60 128 61C141 61 145 72 137 77C131 81 123 76 119 71C114 82 102 81 100 74C99 70 102 67 105 65Z" />
+      <circle className="holiday-berry" cx="56" cy="119" r="7" />
+      <circle className="holiday-berry" cx="70" cy="124" r="6" />
+      <circle className="holiday-berry" cx="64" cy="136" r="6.5" />
+    </svg>
+  );
+}
 
 function Home() {
   const firstPanelRef = useRef<HTMLElement>(null);
@@ -32,10 +102,13 @@ function Home() {
 
   return (
     <div className="storefront">
+      <Snowfall />
       <section className="home-screen-panel home-screen-one" ref={firstPanelRef}>
       <div className="delivery-strip"><span className="delivery-message"><Truck size={15} aria-hidden="true" /> Flores frescas y entregas el mismo d&iacute;a</span><span className="delivery-separator" aria-hidden="true">&middot;</span><span className="delivery-origin">Hecho con cari&ntilde;o en Atlixco, Puebla</span></div>
       <section className="store-hero image-hero">
         <img className="hero-photo" src="/images/IMG_inicioweb.png" alt="Isabella Floristería: Flores eternas, tus momentos; arreglo floral en tonos rosas" />
+        <HolidayGarland />
+        <div className="home-holiday-badge"><Sparkles size={14} aria-hidden="true" /> Navidad y Año Nuevo</div>
         <div className="delivery-card quote-card">
           <div className="quote-copy">
             <span className="quote-kicker"><MapPin size={15} /> COTIZACIÓN PERSONALIZADA</span>
@@ -58,32 +131,22 @@ function Home() {
       </section>
       <section className="home-screen-panel home-screen-season">
         <section className="seasonal-section">
+          <HolidayBranch className="holiday-branch-left" />
+          <HolidayBranch className="holiday-branch-right" />
           <div className="seasonal-heading">
-            <span className="seasonal-kicker"><Sparkles size={15} /> FLORES DE TEMPORADA</span>
-            <h2>Tradición que florece.</h2>
-            <p>Se acerca Día de Muertos: recibimos la temporada con los tonos intensos del cempasúchil y el terciopelo. Y pronto, el rojo festivo de las nochebuenas.</p>
+            <span className="seasonal-kicker"><Sparkles size={15} /> NAVIDAD Y AÑO NUEVO</span>
+            <h2>Una nochebuena para celebrar.</h2>
+            <p>Llena tus fiestas de color con nochebuenas: el detalle perfecto para compartir la magia de la Navidad y recibir un nuevo año.</p>
           </div>
           <div className="seasonal-cards">
-            <article className="seasonal-card seasonal-card-marigold">
-              <img src="/images/Flores%20disp/MacetasCempasuchitl.jpg" alt="Maceta de flores de cempasúchil" loading="lazy" />
-              <div className="seasonal-card-shade" />
-              <span className="seasonal-badge">EN TEMPORADA</span>
-              <div className="seasonal-card-copy"><span>01 · DÍA DE MUERTOS</span><h3>Cempasúchil</h3><p>El naranja que guía los recuerdos.</p></div>
-            </article>
-            <article className="seasonal-card seasonal-card-velvet">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKNXk5s2ScKP3Z94Bs-gcX5Y405nIFW1uWPyhG8tZRzw&s=10" alt="Flor de terciopelo" loading="lazy" />
-              <div className="seasonal-card-shade" />
-              <span className="seasonal-badge">EN TEMPORADA</span>
-              <div className="seasonal-card-copy"><span>02 · COLOR Y TEXTURA</span><h3>Terciopelo</h3><p>Un toque profundo para tu ofrenda.</p></div>
-            </article>
             <article className="seasonal-card seasonal-card-poinsettia">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDj97EbmnZGQccZKy8TkqJdRwxJvQHDNLZu7cway6hUQ&s=10" alt="Nochebuena roja" loading="lazy" />
               <div className="seasonal-card-shade" />
-              <span className="seasonal-badge seasonal-badge-soon">PRÓXIMAMENTE</span>
-              <div className="seasonal-card-copy"><span>03 · SE ACERCA NAVIDAD</span><h3>Nochebuenas</h3><p>Muy pronto llegará su rojo brillante.</p></div>
+              <span className="seasonal-badge">ESPÍRITU FESTIVO</span>
+              <div className="seasonal-card-copy"><span>NAVIDAD · AÑO NUEVO</span><h3>Nochebuenas</h3><p>Color, calidez y buenos deseos para compartir en estas fiestas.</p></div>
             </article>
           </div>
-          <Link className="seasonal-cta" to="/contacto#ayuda">Pregunta por las flores de temporada <ArrowRight size={16} /></Link>
+          <Link className="seasonal-cta" to="/contacto#ayuda">Cotiza tus nochebuenas <ArrowRight size={16} /></Link>
         </section>
       </section>
       <section className="home-screen-panel home-screen-two" ref={secondPanelRef}>
