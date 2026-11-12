@@ -90,6 +90,15 @@ button:focus,a:focus{outline:2px solid #d97d94;outline-offset:3px;box-shadow:0 0
 .nav-link.nav-store-link{width:auto;height:auto;min-width:0;min-height:0;margin:0;padding:9px 10px;overflow:visible;isolation:auto}
 .nav-store-link>span:first-child{position:relative;z-index:3;transform:translate(-4px,7px)}
 .nav-link.active{background:linear-gradient(135deg,#fde9ed,#f9dce3);box-shadow:inset 0 0 0 1px rgba(196,98,123,.3),0 0 0 4px rgba(217,125,148,.17),0 0 20px 5px rgba(217,125,148,.28)}
+.nav-link{position:relative;min-height:36px;padding:9px 11px;border-radius:8px;background:linear-gradient(135deg,#fff7f5,#fff0ef);box-shadow:inset 0 0 0 1px rgba(196,98,123,.16),0 3px 10px rgba(217,125,148,.1);transition:color .2s,background .2s,box-shadow .2s,transform .2s}
+.nav-link:hover{background:linear-gradient(135deg,#fde9ed,#f9dce3);box-shadow:inset 0 0 0 1px rgba(196,98,123,.3),0 0 0 3px rgba(217,125,148,.12),0 5px 15px rgba(217,125,148,.2);transform:translateY(-1px)}
+.nav-link-label{position:relative;z-index:3;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.nav-link-label svg{flex:none}
+.navbar{z-index:25;background-color:#F4E2DB}
+.nav-santa-hat{display:none;position:absolute;z-index:4;top:-15px;right:-8px;width:34px;height:28px;overflow:visible;transform:rotate(28deg);transform-origin:100% 100%;filter:drop-shadow(0 2px 2px rgba(75,29,32,.22));pointer-events:none}
+.nav-link.active .nav-santa-hat{display:block}
+.nav-link.nav-store-link{padding:9px 11px}
+:root,body{background-color:#FEF4EF}
 @keyframes pink-tap-flash{0%{box-shadow:0 0 0 0 rgba(221,112,143,0);filter:brightness(1)}35%{box-shadow:0 0 0 5px rgba(221,112,143,.3),0 0 19px 5px rgba(221,112,143,.34);filter:brightness(1.12)}100%{box-shadow:0 0 0 4px rgba(221,112,143,.2),0 0 15px 3px rgba(221,112,143,.2);filter:brightness(1.04)}}
 @media(prefers-reduced-motion:reduce){button:active,a:active,button:focus,a:focus{animation:none}}
 .home-screen-four .occasion-section{grid-template-columns:minmax(0,1.08fr) minmax(0,.82fr);gap:clamp(28px,6vw,76px)}.home-screen-four .occasion-image{width:auto;height:min(56svh,480px);aspect-ratio:4/5;justify-self:center;object-fit:contain;background:transparent}
@@ -206,7 +215,7 @@ img,video,svg{max-width:100%}
 @media(prefers-reduced-motion:reduce){.commitment-card,.values-section .value-card{transition:none}}
 
 /* Experiencias públicas, satisfacción y publicación de reseñas */
-.experiences-header{position:relative;isolation:isolate;overflow:hidden;padding-block:62px;background:linear-gradient(90deg,rgba(251,243,239,.91),rgba(251,243,239,.78)),url('/images/Nosotros/IMG_4748.jpg') center 52%/cover no-repeat}
+.experiences-header{position:relative;isolation:isolate;overflow:hidden;padding-block:62px;background:linear-gradient(90deg,rgba(250,246,242,.75),rgba(250,246,242,.54)),url('/images/Nosotros/IMG_4748.jpg') center 52%/cover no-repeat}
 .experiences-header .section-label{font-weight:700;color:#9f5266}
 .experiences-header h1{color:#563541}
 .experiences-header p{max-width:650px;margin:0 auto 20px;line-height:1.7}
@@ -550,18 +559,10 @@ main :is(.eyebrow,.section-label,.about-kicker,.contact-kicker,.seasonal-kicker,
 
 .snowfall-layer{position:fixed;inset:0;z-index:20;overflow:hidden;pointer-events:none}
 .snowflake{position:absolute;top:-28px;display:block;color:rgba(248,253,255,.98);-webkit-text-stroke:.6px rgba(48,91,108,.78);line-height:1;text-shadow:0 0 2px rgba(255,255,255,.95),0 1px 6px rgba(35,78,93,.72);opacity:0;will-change:transform,opacity;animation-name:home-snowfall;animation-timing-function:linear;animation-iteration-count:infinite}
-@keyframes home-snowfall{0%{opacity:0;transform:translate3d(0,-28px,0) rotate(0)}8%{opacity:.96;transform:translate3d(var(--snow-sway-one),6vh,0) rotate(var(--snow-rotation-one))}25%{opacity:.94;transform:translate3d(var(--snow-sway-two),18.75vh,0) rotate(var(--snow-rotation-two))}50%{opacity:.91;transform:translate3d(var(--snow-sway-three),37.5vh,0) rotate(var(--snow-rotation-three))}75%{opacity:.82;transform:translate3d(var(--snow-sway-end),56.25vh,0) rotate(var(--snow-rotation-end))}90%{opacity:.38;transform:translate3d(var(--snow-sway-end),67.5vh,0) rotate(calc(var(--snow-rotation-end) + 40deg))}100%{opacity:0;transform:translate3d(var(--snow-sway-end),calc(75vh + 56px),0) rotate(calc(var(--snow-rotation-end) + 70deg))}}
+@keyframes home-snowfall{0%{opacity:0;transform:translate3d(0,-28px,0) rotate(0)}8%{opacity:.96;transform:translate3d(var(--snow-sway-one),6vh,0) rotate(var(--snow-rotation-one))}25%{opacity:.94;transform:translate3d(var(--snow-sway-two),18.75vh,0) rotate(var(--snow-rotation-two))}50%{opacity:.91;transform:translate3d(var(--snow-sway-three),37.5vh,0) rotate(var(--snow-rotation-three))}75%{opacity:.82;transform:translate3d(var(--snow-sway-end),56.25vh,0) rotate(var(--snow-rotation-end))}90%{opacity:.38;transform:translate3d(var(--snow-sway-end),67.5vh,0) rotate(calc(var(--snow-rotation-end) + 40deg))}100%{opacity:0;transform:translate3d(var(--snow-sway-end),calc(75vh + 28px),0) rotate(calc(var(--snow-rotation-end) + 70deg))}}
 @media(prefers-reduced-motion:reduce){.snowfall-layer{display:none}}
 
 .home-screen-one .image-hero{isolation:isolate}
-.holiday-garland{position:absolute;top:0;left:0;z-index:2;width:100%;height:clamp(48px,6.5vw,78px);overflow:visible;pointer-events:none}
-.holiday-garland-wire{fill:none;stroke:rgba(49,75,51,.94);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 1px 2px rgba(23,31,22,.22))}
-.holiday-bulb{animation:holiday-light-glow 3.6s ease-in-out infinite;opacity:.86}
-.holiday-bulb-0{--bulb-color:#d95f59}.holiday-bulb-1{--bulb-color:#f1c761}.holiday-bulb-2{--bulb-color:#78ad77}.holiday-bulb-3{--bulb-color:#f3e2ae}
-.holiday-bulb-stem{stroke:#354d37;stroke-width:2;stroke-linecap:round}
-.holiday-bulb-glass{fill:var(--bulb-color);stroke:rgba(255,247,224,.9);stroke-width:1;filter:drop-shadow(0 0 5px var(--bulb-color))}
-.holiday-bulb-glint{fill:#fff9e8;opacity:.9}
-@keyframes holiday-light-glow{0%,100%{opacity:.72;filter:brightness(.95)}50%{opacity:1;filter:brightness(1.2)}}
 .home-holiday-badge{position:absolute;top:clamp(58px,7vw,86px);right:clamp(14px,4vw,54px);z-index:3;display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border:1px solid rgba(183,145,73,.55);border-radius:999px;background:rgba(255,250,239,.92);box-shadow:0 5px 16px rgba(58,47,31,.13);backdrop-filter:blur(7px);color:#684b31;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .home-holiday-badge svg{color:#a47b3f}
 .home-screen-season .seasonal-section{position:relative;isolation:isolate}
@@ -578,6 +579,188 @@ main :is(.eyebrow,.section-label,.about-kicker,.contact-kicker,.seasonal-kicker,
 .home-screen-one .category-tile:hover .category-image{border-color:#c2a15e;box-shadow:0 7px 18px rgba(105,79,39,.16)}
 .home-screen-one .whatsapp-quote,.home-screen-three .quote-cta,.home-screen-four .store-button{box-shadow:inset 0 0 0 1px rgba(247,224,170,.75)}
 .home-screen-season .seasonal-cta{box-shadow:0 0 18px rgba(232,201,142,.12)}
-@media(max-width:600px){.holiday-garland{height:48px}.home-holiday-badge{top:52px;right:10px;padding:7px 9px;font-size:8px}.holiday-branch{width:82px;opacity:.42}.holiday-branch-left{top:0;left:-4px}.holiday-branch-right{right:-4px;bottom:0}}
-@media(prefers-reduced-motion:reduce){.holiday-bulb{animation:none;opacity:1}}
+@media(max-width:600px){.home-holiday-badge{top:52px;right:10px;padding:7px 9px;font-size:8px}.holiday-branch{width:82px;opacity:.42}.holiday-branch-left{top:0;left:-4px}.holiday-branch-right{right:-4px;bottom:0}}
 
+
+/* Sección de flores disponibles con el marco floral de temporada. */
+.home-floral-section{position:relative;isolation:isolate;max-width:1480px;width:100%;padding:20px clamp(20px,3vw,42px) 38px;margin-inline:auto;border-block:1px solid rgba(194,147,86,.56);background:linear-gradient(180deg,#fffaf5,#fff5ee 68%,#fff9f3)}
+.home-floral-section::before{position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 8% 24%,rgba(211,158,93,.22) 0 2px,transparent 3px),radial-gradient(circle at 28% 72%,rgba(211,158,93,.15) 0 1.5px,transparent 2.5px),radial-gradient(circle at 72% 26%,rgba(211,158,93,.17) 0 2px,transparent 3px),radial-gradient(circle at 92% 68%,rgba(177,47,64,.12) 0 2px,transparent 3px);content:"";pointer-events:none}
+.home-floral-section .floral-corner{z-index:0;width:clamp(100px,12vw,172px);opacity:.58;filter:drop-shadow(0 2px 5px rgba(73,47,33,.14))}
+.home-floral-section .floral-corner-left{top:4px;left:-28px;transform:rotate(-8deg)}
+.home-floral-section .floral-corner-right{right:-28px;bottom:-12px;transform:scaleX(-1)}
+.home-floral-heading-row{position:relative;z-index:1;margin:0 auto 4px}
+.home-floral-heading{display:flex;align-items:center;justify-content:center;gap:clamp(9px,1.6vw,22px)}
+.home-floral-heading h2{margin:0;color:#7d1c34;font:500 clamp(24px,2.45vw,33px)/1.15 'Playfair Display',serif;text-align:center;white-space:nowrap}
+.home-floral-divider{display:block;flex:none;width:clamp(58px,10vw,132px);height:auto;overflow:visible}
+.home-floral-divider-right{transform:scaleX(-1)}
+.home-floral-divider-line{stroke:#c99b61;stroke-width:1.1;stroke-linecap:round}
+.home-floral-divider-stem{stroke:#607448;stroke-width:1.7;stroke-linecap:round;fill:none}
+.home-floral-divider-leaf{fill:#48653d;stroke:#8d9a62;stroke-width:.6}
+.home-floral-divider-berry{fill:#a62a3e;stroke:#e6b07a;stroke-width:.8}
+.home-floral-heading-row>.subtle-link{position:absolute;top:50%;right:0;transform:translateY(-50%);color:#814050}
+.home-floral-description{position:relative;z-index:1;max-width:790px;margin:0 auto 18px;color:#745b52;font-size:11px;line-height:1.55;text-align:center}
+.home-floral-section .category-row{position:relative;z-index:1;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.6vw,22px)}
+.home-floral-section .category-tile{overflow:hidden;border:1px solid rgba(188,144,91,.32);border-radius:11px;background:#fffdf9;box-shadow:0 7px 17px rgba(80,51,42,.09);transition:transform .22s ease,box-shadow .22s ease}
+.home-floral-section .category-tile:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(80,51,42,.15)}
+.home-floral-section .category-image{height:clamp(112px,13vw,176px);overflow:hidden;border:0;border-radius:10px 10px 0 0;background:#eee2d9}
+.home-floral-section .category-image img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.home-floral-section .category-icon{display:none}
+.home-floral-section .category-name{margin:0;padding:9px 8px 11px;background:#fffdf9;color:#56373a;font:500 14px/1.2 'Playfair Display',serif}
+@media(max-width:850px){
+  .home-floral-section .category-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .home-floral-section .category-image{height:clamp(122px,22vw,190px)}
+  .home-floral-section .floral-corner{width:clamp(90px,16vw,138px);opacity:.38}
+}
+@media(max-width:620px){
+  .home-floral-section{padding:21px 16px 30px}
+  .home-floral-heading{gap:7px}
+  .home-floral-heading h2{max-width:calc(100vw - 110px);font-size:22px;white-space:normal}
+  .home-floral-divider{width:clamp(28px,8vw,44px)}
+  .home-floral-heading-row>.subtle-link{position:static;display:flex;width:max-content;margin:7px auto 0;transform:none}
+  .home-floral-description{max-width:440px;margin-bottom:14px;font-size:11px}
+  .home-floral-section .category-row{gap:11px}
+  .home-floral-section .category-image{height:clamp(105px,34vw,150px)}
+  .home-floral-section .category-name{padding:9px 5px;font-size:12px}
+  .home-floral-section .floral-corner{width:72px;opacity:.24}
+  .home-floral-section .floral-corner-left{left:-25px}
+  .home-floral-section .floral-corner-right{right:-25px;bottom:-12px}
+}
+@media(prefers-reduced-motion:reduce){.home-floral-section .category-tile,.home-floral-section .category-image img{transition:none}}
+
+/* Ambiente navideño en marfil cálido para las flores disponibles. */
+.home-floral-section{background:#fffdf6;border-block-color:rgba(191,153,91,.62)}
+.home-floral-section::before{background:radial-gradient(circle at 7% 28%,rgba(204,163,95,.2) 0 2px,transparent 3px),radial-gradient(circle at 23% 73%,rgba(194,54,66,.09) 0 1.5px,transparent 2.5px),radial-gradient(circle at 74% 61%,rgba(204,163,95,.18) 0 2px,transparent 3px),radial-gradient(circle at 93% 30%,rgba(194,54,66,.1) 0 1.5px,transparent 2.5px),linear-gradient(180deg,#fffdf7,#fffaf0 70%,#fffdf6)}
+.home-floral-section::after{position:absolute;top:0;right:0;left:0;z-index:0;height:24px;background:radial-gradient(circle at 12px 10px,#ffe6ab 0 2px,rgba(255,227,170,.32) 3px,transparent 6px) 0 0/92px 24px repeat-x,radial-gradient(circle at 56px 16px,#cb4951 0 1.5px,rgba(203,73,81,.22) 3px,transparent 6px) 0 0/92px 24px repeat-x,linear-gradient(176deg,transparent 39%,rgba(69,93,54,.5) 41% 44%,transparent 47%) 0 0/92px 24px repeat-x;content:"";opacity:.72;pointer-events:none}
+.home-floral-section .floral-corner{opacity:.74;filter:drop-shadow(0 3px 6px rgba(50,58,35,.16))}
+.home-floral-section .floral-corner-left{top:10px;left:-25px}
+.home-floral-section .floral-corner-right{right:-25px;bottom:-7px}
+.home-floral-section .home-floral-snowflake{position:absolute;z-index:0;color:#b99054;opacity:.5;filter:drop-shadow(0 1px 2px rgba(153,114,60,.12));pointer-events:none}
+.home-floral-section .home-floral-snowflake-one{top:35px;left:17%}
+.home-floral-section .home-floral-snowflake-two{top:48%;left:43%}
+.home-floral-section .home-floral-snowflake-three{top:31px;right:18%}
+.home-floral-section .home-floral-snowflake-four{right:39%;bottom:21%}
+.home-floral-heading h2{color:#72172f}
+.home-floral-divider-line{stroke:#b78d51}
+.home-floral-divider-stem{stroke:#405b37}
+.home-floral-divider-leaf{fill:#365638;stroke:#80905b}
+.home-floral-divider-berry{fill:#a52339;stroke:#e5bb78}
+.home-floral-heading-row>.subtle-link{color:#86283d}
+.home-floral-description{color:#6f594a}
+.home-floral-section .category-tile{border-color:rgba(181,140,78,.42);background:#fffef9;box-shadow:0 7px 18px rgba(81,65,39,.1)}
+.home-floral-section .category-name{background:#fffef9;color:#4b4635}
+@media(max-width:620px){
+  .home-floral-section::after{height:20px;background-size:78px 20px,78px 20px,78px 20px}
+  .home-floral-section .floral-corner{opacity:.42}
+  .home-floral-section .home-floral-snowflake{opacity:.38}
+}
+
+
+.home-floral-section::before,.home-floral-section::after{display:none}
+.home-floral-banner{position:relative;z-index:1;display:block;width:100vw;max-width:100vw;height:auto;margin:0 0 0 calc(50% - 50vw);border-radius:0}
+.home-floral-all-link{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:9px;width:max-content;min-height:42px;margin:16px auto 3px;padding:0 20px;border:1px solid rgba(216,178,103,.85);border-radius:999px;background:linear-gradient(115deg,#741b35,#9d2e49);box-shadow:0 6px 16px rgba(95,34,49,.18),inset 0 1px 0 rgba(255,255,255,.16);color:#fff9ef;font-size:12px;font-weight:700;letter-spacing:.025em;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.home-floral-all-link svg:first-child{color:#f2d18a}
+.home-floral-all-link:hover{transform:translateY(-2px);background:linear-gradient(115deg,#84223d,#ad3953);box-shadow:0 9px 20px rgba(95,34,49,.25),inset 0 1px 0 rgba(255,255,255,.2);color:#fff9ef}
+@media(prefers-reduced-motion:reduce){.home-floral-all-link{transition:none}}
+.home-floral-section .category-row{gap:clamp(8px,1.2vw,16px)}
+.home-floral-section .category-image{height:clamp(88px,9vw,125px)}
+.home-floral-section .category-name{padding:7px 6px 8px;font-size:13px}
+@media(max-width:620px){
+  .home-floral-section .category-row{gap:9px}
+  .home-floral-section .category-image{height:88px}
+  .home-floral-section .category-name{padding:6px 5px 7px;font-size:11px}
+}
+.home-screen-one .image-hero .quote-card{border:1px solid rgba(224,179,143,.78);border-radius:16px;background:linear-gradient(145deg,rgba(255,250,244,.98),rgba(255,239,228,.97));box-shadow:0 12px 32px rgba(97,56,43,.2)}
+.home-screen-one .whatsapp-quote{position:relative;overflow:visible;border-radius:5px}
+.home-screen-one .whatsapp-quote .quote-santa-hat{position:absolute;top:-17px;right:-8px;z-index:3;width:36px;height:30px;overflow:visible;transform:rotate(24deg);transform-origin:100% 100%;filter:drop-shadow(0 2px 2px rgba(75,29,32,.3));pointer-events:none}
+.storefront .holiday-announcement{position:relative;z-index:4;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:clamp(12px,2.4vw,34px);height:44px;min-height:44px;padding:0 clamp(12px,3vw,38px);overflow:hidden;border-block:1px solid rgba(232,189,112,.9);background:radial-gradient(ellipse at 50% 0,rgba(187,47,64,.38),transparent 65%),linear-gradient(90deg,#5d1023,#86182e 48%,#5d1023);box-shadow:inset 0 1px 0 rgba(255,246,216,.16),inset 0 -1px 0 rgba(50,5,17,.5);color:#fff2d9;font-size:14px;letter-spacing:normal}
+.storefront .holiday-announcement::before{position:absolute;inset:0;background:radial-gradient(circle at 5% 50%,rgba(255,221,151,.9) 0 1px,rgba(255,204,114,.35) 2px,transparent 6px),radial-gradient(circle at 17% 32%,rgba(255,224,164,.85) 0 1px,transparent 4px),radial-gradient(circle at 83% 68%,rgba(255,224,164,.85) 0 1px,transparent 4px),radial-gradient(circle at 95% 48%,rgba(255,221,151,.9) 0 1px,rgba(255,204,114,.35) 2px,transparent 6px);content:"";pointer-events:none}
+.storefront .holiday-announcement>span{position:relative;z-index:1;opacity:1}
+.holiday-announcement-decoration{display:flex;flex:none;align-items:center;gap:clamp(4px,.8vw,11px);color:#f6d58e;filter:drop-shadow(0 0 5px rgba(255,212,127,.35))}
+.holiday-announcement-decoration svg{width:clamp(13px,1.4vw,18px);height:clamp(13px,1.4vw,18px);stroke-width:1.7}
+.holiday-announcement-decoration svg:nth-child(2){color:#fff0cc}
+.holiday-announcement-copy{max-width:min(72vw,880px);overflow:hidden;color:#fff3df;font:italic 500 clamp(13px,1.45vw,18px)/1.2 'Playfair Display',serif;text-align:center;text-overflow:ellipsis;white-space:nowrap;animation:holiday-copy-slide-in .55s ease both}
+@keyframes holiday-copy-slide-in{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:600px){
+  .storefront .holiday-announcement{gap:10px;height:42px;min-height:42px;padding-inline:12px}
+  .holiday-announcement-decoration{gap:3px}
+  .holiday-announcement-decoration svg:first-child,.holiday-announcement-decoration svg:last-child{display:none}
+  .holiday-announcement-decoration svg{width:15px;height:15px}
+  .holiday-announcement-copy{max-width:calc(100vw - 74px);font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.holiday-announcement-copy{animation:none}}
+
+/* Paleta cálida para las secciones de la página principal. */
+.home-screen-one{background:linear-gradient(180deg,#fff8ef,#f9eadc)}
+.home-screen-one .image-hero{background:#f4e2d4}
+.home-screen-one .home-floral-section{background:linear-gradient(145deg,#fff5e8,#f7e6d5);border-block-color:rgba(196,145,88,.68)}
+.home-screen-one .home-floral-section .category-tile{background:#fffaf3;border-color:rgba(186,127,70,.46);box-shadow:0 7px 18px rgba(106,65,40,.12)}
+.home-screen-one .home-floral-section .category-name{background:#fffaf3;color:#6f4239}
+.home-screen-season{background:#682b38;color:#fff8ee}
+.home-screen-season::before{background:radial-gradient(ellipse at 14% 8%,rgba(222,145,85,.28),transparent 40%),radial-gradient(ellipse at 88% 86%,rgba(214,104,79,.2),transparent 44%),linear-gradient(135deg,#672b39,#813d40 55%,#4f2630)}
+.home-screen-two{background:#fff5eb}
+.home-screen-two .products-section{background:linear-gradient(145deg,#f8eade,#f3e2d5)}
+.home-screen-two .product-image{background:#ead5c5}
+.home-screen-two .home-facebook-section{background:#f8e9dd}
+.home-screen-two .home-facebook-card{border-color:#e6cbb5;background:#fff9f1;box-shadow:0 10px 28px rgba(110,67,44,.1)}
+.home-screen-two .home-facebook-card h2{color:#704047}
+.home-screen-three{background:#f3e1d6}
+.home-screen-three .promise-band{background:linear-gradient(120deg,#713c47,#995548)}
+.home-screen-three .newsletter-band{background:linear-gradient(145deg,#fff2e5,#f7e2d3)}
+.home-screen-four{background:linear-gradient(180deg,#fff8ef,#f7e8db)}
+.home-screen-four .occasion-image{overflow:hidden;border-radius:16px;background:#ecd4c3;box-shadow:0 14px 34px rgba(105,63,43,.13)}
+.home-screen-four .occasion-copy h2{color:#713e4b}
+.home-screen-four .store-button{background:#a45145}
+.home-screen-four .store-button:hover{background:#873d37}
+.home-screen-four .occasion-foot{color:#a85e4c}
+
+.published-reviews-section{background:linear-gradient(180deg,#fffaf5,#f9eee6)}
+.published-reviews-section .experiences-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));justify-content:center;gap:24px;max-width:1120px;margin-inline:auto}
+.published-reviews-section .instagram-review-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid #ead9cc;border-radius:18px;background:#fffdf9;box-shadow:0 10px 28px rgba(93,55,38,.11)}
+.instagram-post-header{display:flex;align-items:center;gap:11px;padding:13px 15px;background:#fffaf4}
+.instagram-review-avatar{width:38px;height:38px;display:grid;place-items:center;flex:none;border:2px solid #d7a55b;border-radius:50%;background:linear-gradient(135deg,#a94e56,#d18564);color:#fffaf2;font:600 15px 'Playfair Display',serif;box-shadow:0 0 0 2px #f5e2cb}
+.instagram-review-author{display:grid;gap:2px;min-width:0;color:#563541;font-size:12px}
+.instagram-review-author span{color:#a27d67;font-size:10px}
+.published-reviews-section .instagram-review-image{position:relative;display:block;width:100%;height:auto;min-height:0;aspect-ratio:1;overflow:hidden;background:#f0dfd1;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.published-reviews-section .instagram-review-image:focus-visible{outline:3px solid #b6535d;outline-offset:-3px}
+.published-reviews-section .instagram-review-image>img{display:block;width:100%;height:100%;max-height:none;object-fit:cover;object-position:center;user-select:none;-webkit-user-select:none}
+.instagram-heart-burst{position:absolute;z-index:2;width:100px;height:100px;transform:translate(-50%,-50%);pointer-events:none;animation:instagram-heart-burst .72s ease-out both}
+@keyframes instagram-heart-burst{0%{opacity:0;transform:translate(-50%,-50%) scale(.25)}35%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}70%{opacity:1;transform:translate(-50%,-58%) scale(1)}100%{opacity:0;transform:translate(-50%,-70%) scale(.85)}}
+.instagram-burst-heart{position:absolute;inset:2px;width:96px;height:96px;color:#ff3b5c;filter:drop-shadow(0 6px 16px rgba(60,12,26,.28));animation:instagram-heart-pop .58s cubic-bezier(.2,.8,.2,1) both}
+@keyframes instagram-heart-pop{0%{transform:scale(.1)}42%{transform:scale(1.16)}72%{transform:scale(.93)}100%{transform:scale(1)}}
+.instagram-heart-particle{position:absolute;top:calc(50% - 4px);left:calc(50% - 4px);width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 1px 5px rgba(70,35,40,.22);animation:instagram-particle-burst .58s cubic-bezier(.2,0,0,1) .04s both}
+@keyframes instagram-particle-burst{0%{opacity:1;transform:translate(0,0) scale(.7)}65%{opacity:1;transform:translate(var(--particle-x),var(--particle-y)) scale(1)}100%{opacity:0;transform:translate(var(--particle-x),var(--particle-y)) scale(.2)}}
+.instagram-post-info{padding:12px 15px 16px}
+.instagram-post-actions{display:flex;align-items:center;gap:12px;margin:0 0 7px}
+.instagram-like-button{width:37px;height:37px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:transparent;color:#573f43;cursor:pointer;transition:color .18s ease,transform .18s ease}
+.instagram-like-button:hover:not(:disabled){transform:scale(1.1);color:#e8495c}
+.instagram-like-button.is-liked{color:#f0445b;animation:instagram-like-pop .32s ease-out}
+.instagram-like-button:disabled{cursor:default;opacity:1}
+@keyframes instagram-like-pop{0%{transform:scale(.78)}65%{transform:scale(1.24)}100%{transform:scale(1)}}
+.instagram-post-actions .experience-rating{margin-left:auto;color:#bd8b4f}
+.instagram-like-count{display:block;margin:2px 0 7px;color:#563541;font-size:12px;font-weight:700;animation:instagram-count-in .28s cubic-bezier(.2,.8,.2,1) both}
+@keyframes instagram-count-in{from{opacity:0;transform:translateY(6px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+.instagram-review-caption{min-height:0;margin:0;color:#645353;font-size:12px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.instagram-review-caption strong{margin-right:4px;color:#563541}
+.instagram-post-date{display:block;margin-top:9px;color:#a18e84;font-size:9px;text-transform:uppercase;letter-spacing:.06em}
+.instagram-post-info .florist-reply{margin-top:13px;border-left-color:#c48e53;background:#fcf1e5}
+.instagram-post-info .florist-reply strong{color:#70473d}
+@media(prefers-reduced-motion:reduce){.instagram-heart-burst,.instagram-heart-burst *,.instagram-like-button.is-liked,.instagram-like-count{animation:none}}
+
+/* Tarjeta cálida para invitar a compartir nuevas experiencias. */
+.share-experience-section{padding:clamp(42px,6vw,76px) 0;background:radial-gradient(ellipse at 8% 12%,rgba(192,128,91,.2),transparent 36%),linear-gradient(180deg,#ead5c7,#dfc1b0)}
+.share-experience-inner{position:relative;isolation:isolate;overflow:hidden;width:calc(100% - 48px);max-width:1120px;padding:clamp(24px,4vw,48px);grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:center;gap:clamp(28px,5vw,64px);border:1px solid rgba(174,119,88,.4);border-radius:28px;background:linear-gradient(132deg,#f0d9c8 0%,#ebd0bc 52%,#f2ddce 100%);box-shadow:0 22px 64px rgba(103,63,49,.16);text-align:left}
+.share-experience-inner::before{position:absolute;z-index:0;top:-130px;left:-110px;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle,rgba(222,164,111,.2),rgba(239,199,160,.08) 48%,transparent 72%);content:"";pointer-events:none}
+.share-experience-intro{position:relative;z-index:1;top:auto;align-self:center;padding:8px 0}
+.share-icon{width:58px;height:58px;margin-bottom:22px;border:1px solid rgba(166,111,77,.34);background:linear-gradient(145deg,#f7e8d9,#efd5c0);color:#965447;box-shadow:0 8px 22px rgba(125,75,55,.14)}
+.share-experience-intro>.section-label{display:inline-block;padding:7px 10px;border:1px solid rgba(168,111,80,.26);border-radius:999px;background:rgba(247,229,214,.72);color:#895047;font-size:9px;letter-spacing:.12em}
+.share-experience-intro h2{color:#613d3d}
+.share-experience-intro>p{color:#74615a}
+.share-experience-intro .share-features{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:flex-start;gap:9px;margin-top:22px}
+.share-experience-intro .share-features span{gap:7px;padding:9px 11px;border:1px solid rgba(177,126,93,.28);border-radius:999px;background:rgba(247,231,217,.82);color:#684a42;font-size:11px;box-shadow:0 3px 9px rgba(115,76,53,.06)}
+.share-experience-intro .share-features svg{width:15px;height:15px;color:#aa7650}
+.review-form{position:relative;z-index:1;border-color:rgba(180,132,103,.38);border-radius:21px;background:#f5e6da;box-shadow:0 14px 36px rgba(103,63,49,.12)}
+.review-form>h3{color:#613d3d}
+.review-form .review-field input,.review-form .review-field textarea{border-color:#d9b5a3;background:#fbefe6}
+.review-form .photo-upload{border-color:#d1a08d;background:#f4e1d5}
+@media(max-width:760px){.share-experience-inner{width:calc(100% - 36px);grid-template-columns:minmax(0,1fr);gap:22px;padding:clamp(22px,5vw,34px)}.share-experience-intro{position:relative;padding:0}.share-experience-intro .share-features{justify-content:flex-start}}
+@media(max-width:420px){.share-experience-inner{width:calc(100% - 24px);padding:20px 16px;border-radius:22px}.share-experience-intro h2{font-size:31px}.share-experience-intro .share-features{gap:7px}.share-experience-intro .share-features span{padding:8px 9px;font-size:10px}.review-form{padding:18px}}

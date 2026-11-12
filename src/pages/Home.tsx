@@ -1,5 +1,5 @@
 import { type CSSProperties, useEffect, useRef, useState } from "react";
-import { ArrowRight, BadgeCheck, ChevronRight, Clock3, Flower2, Heart, MapPin, PackageCheck, Sparkles, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, ChevronRight, Clock3, Flower2, Heart, MapPin, PackageCheck, Snowflake, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const categories = [
@@ -12,6 +12,32 @@ const categories = [
 
 const facebookUrl = "https://www.facebook.com/profile.php?id=61594027933855&locale=es_LA";
 
+const holidayMessages = [
+  "Esta Navidad, regalemos momentos que florecen",
+  "Flores frescas para llenar de color tus fiestas",
+  "Regala nochebuenas y comparte la magia navideña",
+  "Un detalle floral para celebrar con quienes más quieres",
+];
+
+function HolidayAnnouncementBar() {
+  const [activeMessage, setActiveMessage] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveMessage((current) => (current + 1) % holidayMessages.length);
+    }, 5200);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="delivery-strip holiday-announcement" aria-live="polite" aria-atomic="true">
+      <span className="holiday-announcement-decoration" aria-hidden="true"><Sparkles /><Snowflake /><Sparkles /></span>
+      <span className="holiday-announcement-copy" key={activeMessage}>{holidayMessages[activeMessage]}</span>
+      <span className="holiday-announcement-decoration" aria-hidden="true"><Sparkles /><Snowflake /><Sparkles /></span>
+    </div>
+  );
+}
+
 function Snowfall() {
   const [flakes] = useState<CSSProperties[]>(() => Array.from({ length: 60 }, () => {
     const duration = 7 + Math.random() * 8;
@@ -21,7 +47,7 @@ function Snowfall() {
     return {
       left: `${2 + Math.random() * 96}%`,
       fontSize: `${12 + Math.random() * 17}px`,
-      animationDelay: `${-Math.random() * duration}s`,
+      animationDelay: `${Math.random() * 5}s`,
       animationDuration: `${duration}s`,
       "--snow-sway-one": sway(),
       "--snow-sway-two": sway(),
@@ -46,27 +72,6 @@ function Snowfall() {
         </span>
       ))}
     </div>
-  );
-}
-
-function HolidayGarland() {
-  const bulbs = [
-    { x: 70, y: 40 }, { x: 190, y: 54 }, { x: 310, y: 55 }, { x: 430, y: 37 },
-    { x: 550, y: 27 }, { x: 670, y: 28 }, { x: 790, y: 48 }, { x: 910, y: 56 },
-    { x: 1030, y: 55 }, { x: 1150, y: 39 },
-  ];
-
-  return (
-    <svg className="holiday-garland" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
-      <path className="holiday-garland-wire" d="M0 35 C100 35 200 67 300 56 C400 45 500 22 600 25 C700 28 800 58 900 56 C1000 60 1100 44 1200 35" />
-      {bulbs.map(({ x, y }, index) => (
-        <g className={`holiday-bulb holiday-bulb-${index % 4}`} key={x} style={{ animationDelay: `${index * 0.24}s` }}>
-          <line className="holiday-bulb-stem" x1={x} y1={y - 9} x2={x} y2={y - 2} />
-          <circle className="holiday-bulb-glass" cx={x} cy={y + 4} r="6" />
-          <circle className="holiday-bulb-glint" cx={x - 2} cy={y + 2} r="1.5" />
-        </g>
-      ))}
-    </svg>
   );
 }
 
@@ -104,10 +109,9 @@ function Home() {
     <div className="storefront">
       <Snowfall />
       <section className="home-screen-panel home-screen-one" ref={firstPanelRef}>
-      <div className="delivery-strip"><span className="delivery-message"><Truck size={15} aria-hidden="true" /> Flores frescas y entregas el mismo d&iacute;a</span><span className="delivery-separator" aria-hidden="true">&middot;</span><span className="delivery-origin">Hecho con cari&ntilde;o en Atlixco, Puebla</span></div>
+      <HolidayAnnouncementBar />
       <section className="store-hero image-hero">
-        <img className="hero-photo" src="/images/IMG_inicioweb.png" alt="Isabella Floristería: Flores eternas, tus momentos; arreglo floral en tonos rosas" />
-        <HolidayGarland />
+        <img className="hero-photo" src="/images/Nimagen_principal.png" alt="Banner navideño de Isabella Floristería con rosas y lirios rosados y el mensaje Hacemos florecer tus momentos" />
         <div className="home-holiday-badge"><Sparkles size={14} aria-hidden="true" /> Navidad y Año Nuevo</div>
         <div className="delivery-card quote-card">
           <div className="quote-copy">
@@ -118,14 +122,20 @@ function Home() {
           <Link className="whatsapp-quote" to="/contacto#ayuda">
             <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.02 3.2A12.7 12.7 0 0 0 5.08 22.35L3.4 28.5l6.3-1.65A12.72 12.72 0 1 0 16.02 3.2Zm0 23.25c-1.9 0-3.76-.5-5.4-1.45l-.39-.23-3.74.98 1-3.64-.25-.4a10.5 10.5 0 1 1 8.78 4.74Zm5.76-7.86c-.32-.16-1.9-.94-2.2-1.04-.3-.11-.51-.16-.73.16-.22.32-.83 1.04-1.02 1.26-.19.21-.38.24-.7.08-.33-.16-1.38-.51-2.63-1.62-.98-.87-1.64-1.95-1.83-2.28-.19-.32-.02-.49.14-.65.15-.14.33-.38.49-.57.16-.19.21-.32.32-.54.11-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.4-.26-.62-.53-.54-.73-.55h-.62c-.22 0-.57.08-.86.4-.3.33-1.13 1.1-1.13 2.68 0 1.59 1.16 3.12 1.32 3.34.16.21 2.28 3.48 5.52 4.88.77.33 1.37.53 1.84.68.77.24 1.47.21 2.02.13.62-.1 1.9-.78 2.17-1.54.27-.76.27-1.4.19-1.54-.08-.14-.3-.22-.62-.38Z"/></svg>
             Cotizar por WhatsApp <ChevronRight size={16} />
+            <svg className="quote-santa-hat" viewBox="0 0 42 34" aria-hidden="true" focusable="false">
+              <path d="M6 24C10 12 20 5 32 4c-4 6-2 12 5 16-10-4-21-2-30 5Z" fill="#bd1f32" />
+              <path d="M8 19C14 11 21 7 29 6" fill="none" stroke="#e95b68" strokeLinecap="round" strokeWidth="2" />
+              <path d="M5 23c9-6 22-8 33-3l2 5c-11-5-24-3-34 4l-3-4 2-2Z" fill="#fffdfb" />
+              <circle cx="33" cy="5" r="5" fill="#fffdfb" />
+            </svg>
           </Link>
         </div>
       </section>
 
-      <section className="category-section section-container">
-        <div className="section-heading-store"><div><span className="eyebrow pink">SIEMPRE DISPONIBLES</span><h2>Flores que siempre tenemos</h2></div><Link to="/trabajos" className="subtle-link">Ver todos <ArrowRight size={16} /></Link></div>
-        <p style={{ margin: "-10px 0 22px", color: "#796e6c", fontSize: 13, lineHeight: 1.6 }}>Los precios de nuestras flores varían según el día y la temporada. Por eso no manejamos precios fijos; contáctanos para cotizar.</p>
+      <section className="category-section section-container home-floral-section">
+        <img className="home-floral-banner" src="/images/banner_flores_siempre_tenemos_4x.png" alt="Flores que siempre tenemos. Los precios de nuestras flores var\u00edan seg\u00fan el d\u00eda y la temporada. Cont\u00e1ctanos para cotizar." />
         <div className="category-row">{categories.map(({ name, icon: Icon, image }) => <Link to="/contacto#ayuda" className="category-tile" key={name}><span className="category-image"><img src={image} alt="" /><span className="category-icon"><Icon size={17} /></span></span><span className="category-name">{name}</span></Link>)}</div>
+        <Link to="/trabajos" className="subtle-link home-floral-all-link"><Flower2 size={16} aria-hidden="true" /> Ver todos <ArrowRight size={16} aria-hidden="true" /></Link>
       </section>
 
       </section>
@@ -134,16 +144,16 @@ function Home() {
           <HolidayBranch className="holiday-branch-left" />
           <HolidayBranch className="holiday-branch-right" />
           <div className="seasonal-heading">
-            <span className="seasonal-kicker"><Sparkles size={15} /> NAVIDAD Y AÑO NUEVO</span>
+            <span className="seasonal-kicker"><Sparkles size={15} aria-hidden="true" /> NAVIDAD Y A&Ntilde;O NUEVO</span>
             <h2>Una nochebuena para celebrar.</h2>
-            <p>Llena tus fiestas de color con nochebuenas: el detalle perfecto para compartir la magia de la Navidad y recibir un nuevo año.</p>
+            <p>Llena tus fiestas de color con nochebuenas: el detalle perfecto para compartir la magia de la Navidad y recibir un nuevo a&ntilde;o.</p>
           </div>
           <div className="seasonal-cards">
             <article className="seasonal-card seasonal-card-poinsettia">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDj97EbmnZGQccZKy8TkqJdRwxJvQHDNLZu7cway6hUQ&s=10" alt="Nochebuena roja" loading="lazy" />
               <div className="seasonal-card-shade" />
-              <span className="seasonal-badge">ESPÍRITU FESTIVO</span>
-              <div className="seasonal-card-copy"><span>NAVIDAD · AÑO NUEVO</span><h3>Nochebuenas</h3><p>Color, calidez y buenos deseos para compartir en estas fiestas.</p></div>
+              <span className="seasonal-badge">ESP&Iacute;RITU FESTIVO</span>
+              <div className="seasonal-card-copy"><span>NAVIDAD &#183; A&Ntilde;O NUEVO</span><h3>Nochebuenas</h3><p>Color, calidez y buenos deseos para compartir en estas fiestas.</p></div>
             </article>
           </div>
           <Link className="seasonal-cta" to="/contacto#ayuda">Cotiza tus nochebuenas <ArrowRight size={16} /></Link>

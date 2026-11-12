@@ -8,6 +8,11 @@ export type CustomerReview = {
   created_at: string;
 };
 
+export type CustomerReviewLike = {
+  review_id: number;
+  visitor_id: string;
+};
+
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.replace(/\/$/, "");
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY;
 
@@ -42,6 +47,31 @@ export async function getCustomerReviews(): Promise<CustomerReview[]> {
   });
   if (!response.ok) throw new Error(await readError(response));
   return response.json() as Promise<CustomerReview[]>;
+}
+
+export async function getCustomerReviewLikes(): Promise<CustomerReviewLike[]> {
+  const { url } = requireConfig();
+  const response = await fetch(`${url}/rest/v1/customer_review_likes?select=review_id,visitor_id`, {
+    headers: publicHeaders(),
+  });
+  if (!response.ok) throw new Error(await readError(response));
+  return response.json() as Promise<CustomerReviewLike[]>;
+}
+
+export async function likeCustomerReview(reviewId: number, visitorId: string): Promise<boolean> {
+  const { url } = requireConfig();
+  const response = await fetch(`${url}/rest/v1/customer_review_likes?on_conflict=review_id,visitor_id`, {
+    method: "POST",
+    headers: {
+      ...publicHeaders(),
+      "Content-Type": "application/json",
+      Prefer: "resolution=ignore-duplicates,return=representation",
+    },
+    body: JSON.stringify({ review_id: reviewId, visitor_id: visitorId }),
+  });
+  if (!response.ok) throw new Error(await readError(response));
+  const rows = await response.json() as CustomerReviewLike[];
+  return rows.length > 0;
 }
 
 export async function submitCustomerReview(input: {

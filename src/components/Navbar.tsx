@@ -1,6 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, MessageCircle, ShoppingBag } from "lucide-react";
+import { House, Menu, MessageCircle, ShoppingBag } from "lucide-react";
+
+function SantaHat() {
+  return (
+    <svg className="nav-santa-hat" viewBox="0 0 42 34" aria-hidden="true" focusable="false">
+      <path d="M6 24C10 12 20 5 32 4c-4 6-2 12 5 16-10-4-21-2-30 5Z" fill="#bd1f32" />
+      <path d="M8 19C14 11 21 7 29 6" fill="none" stroke="#e95b68" strokeLinecap="round" strokeWidth="2" />
+      <path d="M5 23c9-6 22-8 33-3l2 5c-11-5-24-3-34 4l-3-4 2-2Z" fill="#fffdfb" />
+      <path d="M6 24c9-6 21-8 31-4" fill="none" stroke="#e9d9d6" strokeLinecap="round" strokeWidth="1" />
+      <circle cx="33" cy="5" r="5" fill="#fffdfb" />
+      <circle cx="33" cy="5" r="2.4" fill="#f3e9e6" />
+    </svg>
+  );
+}
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,13 +60,14 @@ function Navbar() {
           <Menu size={24} />
         </button>
         <nav className={`nav-links ${menuOpen ? "nav-open" : ""}`}>
-          <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Inicio</NavLink>
-          <NavLink to="/trabajos" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Nuestros trabajos</NavLink>
-          <NavLink to="/nosotros" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Nosotros</NavLink>
-          <NavLink to="/experiencias" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Experiencias</NavLink>
-          <NavLink to="/contacto" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Contacto</NavLink>
+          <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}><span className="nav-link-label"><House size={14} aria-hidden="true" />Inicio</span><SantaHat /></NavLink>
+          <NavLink to="/trabajos" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}><span className="nav-link-label">Nuestros trabajos</span><SantaHat /></NavLink>
+          <NavLink to="/nosotros" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}><span className="nav-link-label">Nosotros</span><SantaHat /></NavLink>
+          <NavLink to="/experiencias" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}><span className="nav-link-label">Experiencias</span><SantaHat /></NavLink>
+          <NavLink to="/contacto" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}><span className="nav-link-label">Contacto</span><SantaHat /></NavLink>
           <NavLink to="/tienda" aria-label="Tienda, próximamente" className={({ isActive }) => isActive ? "nav-link active nav-store-link" : "nav-link nav-store-link"} onClick={closeMenu}>
-            <span>Tienda</span>
+            <span className="nav-link-label">Tienda</span>
+            <SantaHat />
             <span className="nav-soon-badge" aria-hidden="true">
               <svg viewBox="0 0 100 60" preserveAspectRatio="none">
                 <defs>

@@ -8,7 +8,8 @@ Esta guía configura la función activa de experiencias de clientes y publica el
 2. Conserva de forma privada la contraseña de la base de datos que solicite Supabase. La aplicación web no la necesita.
 3. En el panel del proyecto, abre **SQL Editor** y crea una consulta nueva.
 4. Desde este repositorio, abre `supabase/experiencias.sql`, copia todo el contenido en la consulta y pulsa **Run** una sola vez. Este archivo crea `public.customer_reviews`, sus políticas RLS y el bucket público `ramilletes-clientes` (JPG, PNG y WEBP, hasta 5 MB).
-5. En **Table Editor**, confirma que aparece `customer_reviews`; en **Storage**, confirma que aparece `ramilletes-clientes`.
+5. Ejecuta `supabase/experiencias_likes.sql` una vez en SQL Editor para habilitar los me gusta y su conteo público.
+6. En **Table Editor**, confirma que aparece `customer_reviews`; en **Storage**, confirma que aparece `ramilletes-clientes`.
 
 El SQL otorga los permisos necesarios para que visitantes puedan leer y publicar experiencias y fotos. Las respuestas de la floristería requieren una cuenta autenticada con el rol `floristeria`. No ejecutes `ecommerce.sql` para conectar esta pantalla: ese esquema se reserva para cuando se implemente la tienda.
 
